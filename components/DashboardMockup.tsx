@@ -386,13 +386,12 @@ function Chev({ className = "" }: { className?: string }) {
 type V = React.ComponentProps<typeof Placeholder>["variant"];
 
 function GenerativePane() {
-  const tiles: { src: string; model: string; type: string }[] = [
-    { src: "/generated/gen1.jpg", model: "GPT-4o", type: "Image" },
-    { src: "/generated/gen5.jpg", model: "Sora", type: "Video" },
-    { src: "/generated/gen2.jpg", model: "DALL·E 3", type: "Image" },
-    { src: "/generated/gen6.jpg", model: "Claude", type: "Image" },
-    { src: "/generated/gen3.jpg", model: "Stable XL", type: "Image" },
-    { src: "/generated/gen4.jpg", model: "Midjourney", type: "Image" },
+  const tiles: { src: string }[] = [
+    { src: "/generated/gen1.jpg" },
+    { src: "/generated/gen2.jpg" },
+    { src: "/generated/gen6.jpg" },
+    { src: "/generated/gen3.jpg" },
+    { src: "/generated/gen4.jpg" },
   ];
   return (
     <div className="grid grid-cols-3 gap-2 md:gap-3">
@@ -416,19 +415,6 @@ function GenerativePane() {
                 "linear-gradient(180deg, rgba(0,0,0,0.18) 0%, transparent 35%, transparent 65%, rgba(0,0,0,0.35) 100%)",
             }}
           />
-          <div className="absolute top-1.5 left-1.5 inline-flex items-center gap-1 rounded-md bg-black/60 backdrop-blur text-white text-[8px] font-semibold px-1.5 py-0.5">
-            <span className="h-1 w-1 rounded-full bg-[#5b4ef7]" />
-            {t.model}
-          </div>
-          <div className="absolute bottom-1.5 right-1.5 inline-flex items-center gap-1 rounded bg-white/95 text-[8px] font-semibold text-[#08080d] px-1.5 py-0.5">
-            {t.type}
-          </div>
-          {i === 1 && (
-            <div className="absolute bottom-1.5 left-1.5 inline-flex items-center gap-1 rounded bg-black/60 backdrop-blur text-white text-[8px] font-semibold px-1.5 py-0.5">
-              <span className="h-1 w-1 rounded-full bg-[#ff5d5d] pulse-soft" />
-              0:24
-            </div>
-          )}
         </div>
       ))}
     </div>

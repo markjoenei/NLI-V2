@@ -244,94 +244,64 @@ export default function LovedByUsers({
           </div>
         )}
 
-        {showCards && (
-          <div
-            className="group/marquee mt-16 md:mt-20 relative overflow-hidden -mx-5 md:-mx-8"
-            style={{
-              maskImage:
-                "linear-gradient(90deg, transparent 0, #000 18%, #000 82%, transparent 100%)",
-              WebkitMaskImage:
-                "linear-gradient(90deg, transparent 0, #000 18%, #000 82%, transparent 100%)",
-            }}
-          >
-            <div
-              className="flex w-max gap-4 md:gap-5 px-5 md:px-8 group-hover/marquee:[animation-play-state:paused]"
-              style={{ animation: "marqueeScroll 40s linear infinite" }}
-            >
-              {[...cards, ...cards].map((c, idx) => (
-                <article
-                  key={`${c.title}-${idx}`}
-                  aria-hidden={idx >= cards.length}
-                  className={`group relative rounded-3xl overflow-hidden flex flex-col card-hover w-[300px] md:w-[340px] lg:w-[360px] shrink-0 ${
-                    isLight
-                      ? "bg-white ring-1 ring-black/[0.06] shadow-[0_12px_40px_-20px_rgba(8,8,13,0.18)]"
-                      : "bg-white/[0.04] ring-1 ring-white/[0.08]"
-                  }`}
-                >
-                  {c.image ? (
-                    <div className="relative aspect-[4/3] w-full overflow-hidden bg-[#0a0a14]">
-                      <Image
-                        src={c.image}
-                        alt={c.title}
-                        fill
-                        className="object-cover transition-transform duration-700 group-hover:scale-[1.04]"
-                        sizes="360px"
-                      />
-                    </div>
-                  ) : (
-                    <CardArt kind={c.kind} />
-                  )}
-                  <div className="p-6 md:p-7 flex flex-col flex-1">
-                    <h3
-                      className={`text-[17px] md:text-[19px] font-semibold leading-[1.2] tracking-tight ${
-                        isLight ? "text-[#08080d]" : "text-white"
-                      }`}
-                    >
-                      {c.title}
-                    </h3>
-                    {c.subhead && (
-                      <p
-                        className={`mt-2.5 text-[13px] md:text-[13.5px] font-semibold tracking-tight ${
-                          isLight ? "text-[#5b4ef7]" : "text-[#a5b4ff]"
-                        }`}
-                      >
-                        {c.subhead}
-                      </p>
-                    )}
-                    <p
-                      className={`mt-3 text-[13.5px] md:text-[14px] leading-relaxed ${
-                        isLight ? "text-[#4a4a55]" : "text-white/65"
-                      }`}
-                    >
-                      {c.body}
-                    </p>
-                    {c.bullets && c.bullets.length > 0 && (
-                      <ul className="mt-3 space-y-1.5">
-                        {c.bullets.map((b) => (
-                          <li
-                            key={b}
-                            className={`flex items-start gap-2 text-[12.5px] md:text-[13px] leading-snug ${
-                              isLight ? "text-[#4a4a55]" : "text-white/70"
-                            }`}
-                          >
-                            <span
-                              className={`mt-1.5 h-1 w-1 rounded-full shrink-0 ${
-                                isLight ? "bg-[#5b4ef7]" : "bg-[#a5b4ff]"
-                              }`}
-                            />
-                            <span>{b}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    )}
-                  </div>
-                </article>
-              ))}
-            </div>
-          </div>
-        )}
-
       </div>
+
+      {showCards && (
+        <div className="group/marquee mt-16 md:mt-20 relative overflow-x-clip w-full py-4">
+          <div
+            className="flex w-max gap-4 md:gap-5 px-5 md:px-8 items-stretch group-hover/marquee:[animation-play-state:paused]"
+            style={{ animation: "marqueeScroll 40s linear infinite" }}
+          >
+            {[...cards, ...cards].map((c, idx) => (
+              <article
+                key={`${c.title}-${idx}`}
+                aria-hidden={idx >= cards.length}
+                className="group relative rounded-3xl overflow-hidden flex flex-col card-hover w-[300px] md:w-[340px] lg:w-[360px] shrink-0 bg-[#0e0a24] ring-1 ring-white/[0.08] shadow-[0_12px_40px_-20px_rgba(8,8,13,0.45)]"
+              >
+                {c.image ? (
+                  <div className="relative aspect-[4/3] w-full overflow-hidden bg-[#0a0a14]">
+                    <Image
+                      src={c.image}
+                      alt={c.title}
+                      fill
+                      className="object-cover transition-transform duration-700 group-hover:scale-[1.04]"
+                      sizes="360px"
+                    />
+                  </div>
+                ) : (
+                  <CardArt kind={c.kind} />
+                )}
+                <div className="p-6 md:p-7 flex flex-col flex-1">
+                  <h3 className="text-[17px] md:text-[19px] font-semibold leading-[1.2] tracking-tight text-white">
+                    {c.title}
+                  </h3>
+                  {c.subhead && (
+                    <p className="mt-2.5 text-[13px] md:text-[13.5px] font-semibold tracking-tight text-[#a5b4ff]">
+                      {c.subhead}
+                    </p>
+                  )}
+                  <p className="mt-3 text-[13.5px] md:text-[14px] leading-relaxed text-white/65">
+                    {c.body}
+                  </p>
+                  {c.bullets && c.bullets.length > 0 && (
+                    <ul className="mt-3 space-y-1.5">
+                      {c.bullets.map((b) => (
+                        <li
+                          key={b}
+                          className="flex items-start gap-2 text-[12.5px] md:text-[13px] leading-snug text-white/70"
+                        >
+                          <span className="mt-1.5 h-1 w-1 rounded-full shrink-0 bg-[#a5b4ff]" />
+                          <span>{b}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+      )}
     </section>
   );
 }
