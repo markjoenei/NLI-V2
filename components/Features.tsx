@@ -11,23 +11,15 @@ export default function Features() {
         <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-8 lg:gap-12 mb-14 md:mb-20">
           <div className="max-w-[900px]">
             <p className="eyebrow mb-5">The &ldquo;Layer&rdquo; Concept</p>
-            <h2 className="display-text text-[28px] sm:text-[36px] md:text-[44px] lg:text-[52px] font-semibold text-[#08080d] tracking-tight leading-[1.05]">
+            <h2 className="display-text text-[28px] sm:text-[36px] md:text-[44px] lg:text-[53px] font-semibold text-[#08080d] tracking-tight leading-[1.05]">
               <span className="block">Your Business Already</span>
               <span className="block">Has the Infrastructure.</span>
               <span className="editorial text-[#989898] block">It&apos;s Missing the Next Layer.</span>
             </h2>
           </div>
-          <div className="max-w-[680px] space-y-4">
+          <div className="max-w-[680px]">
             <p className="text-[15px] md:text-[16px] leading-[1.6] text-[#4a4a55] text-pretty">
-              You have data. Systems. People. Processes.
-              <br />
-              What you don&apos;t have is a layer that ties all of it together, reads what&apos;s happening across it, predicts what comes next, and acts — without waiting for a meeting.
-            </p>
-            <p className="text-[15px] md:text-[16px] leading-[1.6] font-semibold text-[#08080d] text-pretty">
-              That&apos;s the Next Layer.
-            </p>
-            <p className="text-[15px] md:text-[16px] leading-[1.6] text-[#4a4a55] text-pretty">
-              It&apos;s not a software subscription. It&apos;s not a dashboard. It&apos;s an intelligence layer — custom-engineered for how your business actually operates — that sits across your existing stack and makes every part of it work harder.
+              The &ldquo;Next Layer&rdquo; is a custom-engineered intelligence layer designed to unify a business&apos;s data, systems, people, and processes. Rather than acting as a standard software subscription or passive dashboard, it sits on top of an existing tech stack to continuously monitor activity, predict future outcomes, and execute autonomous actions. Ultimately, it ties disparate operations together to maximize the efficiency of every part of the business without the need for manual intervention or meetings.
             </p>
           </div>
         </div>
@@ -55,7 +47,8 @@ export default function Features() {
             body="Your data, finally speaking to you"
             variant="scene-light"
             badge=""
-            tone="light"
+            tone="photo"
+            image="/generated/data-layer.avif"
           />
           <FeatureSmall
             className="col-span-12 md:col-span-6 lg:col-span-4"
@@ -102,10 +95,10 @@ function FeatureBig({
       <div className="grid md:grid-cols-[1.05fr_1fr] items-stretch">
         <div className="relative p-7 md:p-12 lg:p-14 flex flex-col justify-center">
           <Badge>{badge}</Badge>
-          <h3 className="mt-4 text-[26px] md:text-[36px] font-semibold text-[#08080d] max-w-[18ch] tracking-tight leading-[1.05]">
+          <h3 className="mt-4 text-[34px] md:text-[44px] lg:text-[52px] font-semibold text-[#08080d] max-w-[18ch] tracking-tight leading-[1.05]">
             {title}
           </h3>
-          <p className="mt-4 text-[15px] md:text-[16px] text-[#3a3a4a] max-w-[42ch] leading-relaxed">{body}</p>
+          <p className="mt-5 text-[18px] md:text-[20px] lg:text-[22px] text-[#3a3a4a] max-w-[42ch] leading-relaxed">{body}</p>
           {features && features.length > 0 && <FeaturesList items={features} />}
         </div>
         <div className="relative aspect-[4/3] md:aspect-auto md:min-h-[460px] overflow-hidden bg-gradient-to-br from-[#0a0a14] via-[#13132a] to-[#1a1530]">
@@ -133,10 +126,10 @@ function FeatureBig({
           />
 
           {/* Predict → Decide → Execute pipeline card */}
-          <div className="absolute top-6 left-1/2 -translate-x-1/2 w-[88%] max-w-[360px] rounded-2xl bg-white/[0.06] backdrop-blur-md ring-1 ring-white/10 shadow-[0_18px_48px_-18px_rgba(0,0,0,0.6)] p-3.5 md:p-4 float-slow">
-            <div className="flex items-center justify-between mb-3">
-              <span className="text-[9.5px] font-semibold text-white/70 uppercase tracking-[0.14em]">Intelligence Layer</span>
-              <span className="inline-flex items-center gap-1.5 text-[10px] font-semibold text-white/80">
+          <div className="absolute top-8 left-1/2 -translate-x-1/2 w-[92%] max-w-[460px] rounded-2xl bg-white/[0.07] backdrop-blur-md ring-1 ring-white/12 shadow-[0_24px_60px_-20px_rgba(0,0,0,0.65)] p-5 md:p-6 float-slow">
+            <div className="flex items-center justify-between mb-4">
+              <span className="text-[11px] font-bold text-white/80 uppercase tracking-[0.16em]">Intelligence Layer</span>
+              <span className="inline-flex items-center gap-1.5 rounded-full bg-[#22c55e]/15 ring-1 ring-[#22c55e]/30 px-2 py-0.5 text-[10px] font-semibold text-[#86efac]">
                 <span className="relative h-1.5 w-1.5">
                   <span className="absolute inset-0 rounded-full bg-[#22c55e] pulse-soft" />
                   <span className="relative h-1.5 w-1.5 rounded-full bg-[#22c55e]" />
@@ -144,66 +137,125 @@ function FeatureBig({
                 Live
               </span>
             </div>
-            <div className="grid grid-cols-3 gap-2">
+            <div className="relative grid grid-cols-3 gap-3">
+              <div
+                aria-hidden
+                className="absolute left-4 right-4 top-[22px] h-px"
+                style={{
+                  background:
+                    "linear-gradient(90deg, #6f63ff 0%, #9d8cff 50%, #ffa78c 100%)",
+                }}
+              />
               {[
                 { label: "Predict", color: "#6f63ff" },
                 { label: "Decide", color: "#9d8cff" },
                 { label: "Execute", color: "#ffa78c" },
               ].map((step) => (
-                <div key={step.label} className="rounded-lg bg-white/[0.05] ring-1 ring-white/10 px-2.5 py-2">
+                <div key={step.label} className="relative rounded-xl bg-white/[0.06] ring-1 ring-white/12 px-3 py-3">
                   <span
-                    className="block h-1 w-6 rounded-full mb-1.5"
-                    style={{ background: step.color }}
-                  />
-                  <span className="text-[11px] font-semibold text-white">{step.label}</span>
+                    className="relative z-10 mb-2 flex h-10 items-center justify-center rounded-lg w-full"
+                    style={{
+                      background: `linear-gradient(140deg, ${step.color}33 0%, ${step.color}10 100%)`,
+                      boxShadow: `inset 0 0 0 1px ${step.color}40`,
+                    }}
+                  >
+                    <span
+                      className="h-2 w-2 rounded-full"
+                      style={{
+                        background: step.color,
+                        boxShadow: `0 0 12px ${step.color}`,
+                      }}
+                    />
+                  </span>
+                  <span className="block text-[13px] font-semibold text-white tracking-tight">
+                    {step.label}
+                  </span>
                 </div>
               ))}
+            </div>
+            <div className="mt-4 flex items-center justify-between text-[10.5px] font-semibold text-white/60">
+              <span>End-to-end · &lt;1s</span>
+              <span className="text-[#86efac]">12,840 cycles / day</span>
             </div>
           </div>
 
           {/* Signal / prediction card */}
-          <div className="absolute top-1/2 -translate-y-1/2 left-5 w-[200px] md:w-[230px] rounded-2xl bg-white/95 backdrop-blur-md ring-1 ring-black/[0.06] shadow-[0_12px_32px_-12px_rgba(8,8,13,0.45)] p-3 md:p-3.5 float-medium">
-            <div className="flex items-center gap-1.5 mb-2">
+          <div className="absolute top-1/2 -translate-y-1/2 left-6 w-[260px] md:w-[290px] rounded-2xl bg-white/95 backdrop-blur-md ring-1 ring-black/[0.06] shadow-[0_18px_44px_-14px_rgba(8,8,13,0.5)] p-4 md:p-5 float-medium">
+            <div className="flex items-center gap-2.5 mb-3">
               <span
-                className="inline-flex h-4 w-4 items-center justify-center rounded text-white text-[8px] font-bold"
+                className="inline-flex h-8 w-8 items-center justify-center rounded-lg text-white shrink-0"
                 style={{ background: "linear-gradient(135deg, #6f63ff 0%, #5b4ef7 100%)" }}
               >
-                P
+                <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
+                  <path d="M1.5 12L5 8L8 11L14.5 4" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" />
+                  <circle cx="14.5" cy="4" r="1.6" fill="currentColor" />
+                </svg>
               </span>
-              <span className="text-[9.5px] font-semibold text-[#08080d] uppercase tracking-[0.14em]">Prediction</span>
+              <div className="min-w-0">
+                <div className="text-[10px] font-bold text-[#5b4ef7] uppercase tracking-[0.16em] leading-none">Prediction</div>
+                <div className="text-[10.5px] text-black/45 mt-1 leading-none">SKU-2841 · 6h horizon</div>
+              </div>
             </div>
-            <p className="text-[11px] md:text-[11.5px] text-[#3a3a4a] leading-relaxed">
-              Demand spike forecast for SKU-2841 in 6h. Reroute fulfillment.
+            <p className="text-[13px] md:text-[13.5px] font-medium text-[#08080d] leading-snug">
+              Demand spike incoming. Reroute fulfillment from East to Central.
             </p>
-            <div className="mt-2.5 flex items-center justify-between text-[10px]">
-              <span className="text-black/45">Confidence</span>
-              <span className="font-semibold tabular-nums text-[#08080d]">96.4%</span>
+            <div className="mt-3 pt-3 border-t border-black/[0.06] flex items-center justify-between text-[11px]">
+              <span className="text-black/55">Confidence</span>
+              <div className="flex items-center gap-2">
+                <span className="relative h-1.5 w-16 rounded-full bg-black/[0.08] overflow-hidden">
+                  <span className="absolute inset-y-0 left-0 w-[96%] rounded-full bg-gradient-to-r from-[#6f63ff] to-[#22c55e]" />
+                </span>
+                <span className="font-semibold tabular-nums text-[#08080d]">96.4%</span>
+              </div>
             </div>
           </div>
 
           {/* Decision / action card */}
-          <div className="absolute bottom-6 right-5 w-[200px] md:w-[230px] rounded-2xl bg-white/95 backdrop-blur-md ring-1 ring-black/[0.06] shadow-[0_12px_32px_-12px_rgba(8,8,13,0.45)] p-3 md:p-3.5 float-fast">
-            <div className="flex items-center gap-2 mb-1.5">
-              <span className="relative h-1.5 w-1.5">
-                <span className="absolute inset-0 rounded-full bg-[#22c55e] pulse-soft" />
-                <span className="relative h-1.5 w-1.5 rounded-full bg-[#22c55e]" />
+          <div className="absolute bottom-8 right-6 w-[260px] md:w-[290px] rounded-2xl bg-white/95 backdrop-blur-md ring-1 ring-black/[0.06] shadow-[0_18px_44px_-14px_rgba(8,8,13,0.5)] p-4 md:p-5 float-fast">
+            <div className="flex items-center gap-2.5 mb-3">
+              <span
+                className="inline-flex h-8 w-8 items-center justify-center rounded-lg text-white shrink-0"
+                style={{ background: "linear-gradient(135deg, #34d399 0%, #15803d 100%)" }}
+              >
+                <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
+                  <path d="M4 8L7 11L12 5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
               </span>
-              <span className="text-[10.5px] font-semibold text-[#08080d]">Action executed</span>
-              <span className="ml-auto text-[10px] font-semibold text-black/45 tabular-nums">0.4s</span>
+              <div className="flex-1 min-w-0">
+                <div className="text-[10px] font-bold text-[#15803d] uppercase tracking-[0.16em] leading-none">Action executed</div>
+                <div className="text-[10.5px] text-black/45 mt-1 leading-none">0.42s · no human in loop</div>
+              </div>
             </div>
-            <p className="text-[11px] text-[#3a3a4a] leading-snug">
-              Inventory rebalanced across 3 hubs — no human in loop.
+            <p className="text-[13px] md:text-[13.5px] font-medium text-[#08080d] leading-snug">
+              Inventory rebalanced across <span className="font-semibold">3 hubs</span>.
             </p>
+            <div className="mt-3 pt-3 border-t border-black/[0.06] grid grid-cols-3 gap-2 text-center">
+              <div>
+                <div className="text-[15px] font-semibold text-[#08080d] tabular-nums leading-none">3</div>
+                <div className="mt-1 text-[9px] uppercase tracking-wider text-black/45 font-semibold">hubs</div>
+              </div>
+              <div>
+                <div className="text-[15px] font-semibold text-[#08080d] tabular-nums leading-none">2,840</div>
+                <div className="mt-1 text-[9px] uppercase tracking-wider text-black/45 font-semibold">units</div>
+              </div>
+              <div>
+                <div className="text-[15px] font-semibold text-[#15803d] tabular-nums leading-none">+18%</div>
+                <div className="mt-1 text-[9px] uppercase tracking-wider text-black/45 font-semibold">margin</div>
+              </div>
+            </div>
           </div>
 
           {/* Autonomy tag */}
-          <div className="hidden lg:inline-flex absolute bottom-6 left-5 items-center gap-1.5 rounded-lg bg-white/[0.08] backdrop-blur-md ring-1 ring-white/15 px-2.5 py-1.5 float-slow">
-            <span className="inline-flex h-3.5 w-3.5 items-center justify-center rounded bg-[#5b4ef7]/25 text-[#c9c0ff]">
-              <svg width="9" height="9" viewBox="0 0 10 10" fill="currentColor">
+          <div className="hidden lg:inline-flex absolute bottom-8 left-6 items-center gap-2.5 rounded-xl bg-white/[0.08] backdrop-blur-md ring-1 ring-white/15 px-3 py-2 float-slow">
+            <span className="inline-flex h-7 w-7 items-center justify-center rounded-md bg-[#5b4ef7]/25 text-[#c9c0ff]">
+              <svg width="13" height="13" viewBox="0 0 10 10" fill="currentColor">
                 <path d="M5 0.5L6.4 3.3L9.5 3.8L7.3 6L7.8 9L5 7.6L2.2 9L2.7 6L0.5 3.8L3.6 3.3L5 0.5Z" />
               </svg>
             </span>
-            <span className="text-[10.5px] font-semibold text-white">Autonomous</span>
+            <div className="leading-none">
+              <div className="text-[12px] font-semibold text-white">Autonomous</div>
+              <div className="text-[9.5px] text-white/55 mt-1">closed-loop · 24/7</div>
+            </div>
           </div>
         </div>
       </div>
@@ -273,8 +325,8 @@ function FeatureWide({
       <div className="grid md:grid-cols-[1fr_1.25fr] items-stretch">
         <div className="relative p-7 md:p-10 lg:p-12 flex flex-col justify-center">
           <Badge>{badge}</Badge>
-          <h3 className="mt-4 text-[24px] md:text-[32px] font-semibold text-[#08080d] max-w-[20ch] tracking-tight leading-[1.1]">{title}</h3>
-          <p className="mt-4 text-[15px] md:text-[16px] text-[#3a3a4a] max-w-[42ch] leading-relaxed">{body}</p>
+          <h3 className="mt-4 text-[34px] md:text-[44px] lg:text-[52px] font-semibold text-[#08080d] max-w-[20ch] tracking-tight leading-[1.05]">{title}</h3>
+          <p className="mt-5 text-[18px] md:text-[20px] lg:text-[22px] text-[#3a3a4a] max-w-[42ch] leading-relaxed">{body}</p>
           {features && features.length > 0 && <FeaturesList items={features} />}
         </div>
         <AnalyticsDashboardPanel />
@@ -453,8 +505,9 @@ function AnalyticsDashboardPanel() {
 }
 
 type SmallProps = CardBase & {
-  tone?: "light" | "purple" | "image" | "palette" | "systems";
+  tone?: "light" | "purple" | "image" | "palette" | "systems" | "photo";
   features?: string[];
+  image?: string;
 };
 
 function FeatureSmall({
@@ -465,7 +518,49 @@ function FeatureSmall({
   badge,
   tone = "light",
   features,
+  image,
 }: SmallProps) {
+  if (tone === "photo" && image) {
+    return (
+      <article className={`group relative overflow-hidden rounded-3xl bg-[#0a0a14] min-h-[460px] card-hover ${className}`}>
+        <Image
+          src={image}
+          alt={title}
+          fill
+          className="object-cover transition-transform duration-700 group-hover:scale-[1.04]"
+          style={{ objectPosition: "50% 30%" }}
+          sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+        />
+        <div
+          aria-hidden
+          className="absolute inset-0"
+          style={{
+            background:
+              "linear-gradient(180deg, rgba(8,8,13,0.15) 0%, rgba(8,8,13,0.4) 55%, rgba(8,8,13,0.92) 100%)",
+          }}
+        />
+        <div
+          aria-hidden
+          className="absolute inset-0 mix-blend-overlay opacity-70"
+          style={{
+            background:
+              "linear-gradient(135deg, rgba(91,78,247,0.22) 0%, transparent 55%, rgba(91,78,247,0.12) 100%)",
+          }}
+        />
+        <div className="relative p-7 md:p-8 flex flex-col h-full justify-end text-white">
+          <Badge tone="dark">{badge}</Badge>
+          <h3 className="mt-3 text-[22px] md:text-[26px] font-semibold max-w-[20ch] tracking-tight leading-[1.1]">
+            {title}
+          </h3>
+          <p className="mt-3 text-[14.5px] md:text-[15px] text-white/80 max-w-[42ch] leading-relaxed">
+            {body}
+          </p>
+          {features && features.length > 0 && <FeaturesList items={features} tone="dark" />}
+        </div>
+      </article>
+    );
+  }
+
   if (tone === "purple") {
     return (
       <article

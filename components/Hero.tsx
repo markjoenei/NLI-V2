@@ -99,8 +99,11 @@ function TrustLogosMarquee() {
           className="pointer-events-none absolute inset-y-0 right-0 w-20 md:w-32 z-10"
           style={{ background: "linear-gradient(270deg, #ffffff, transparent)" }}
         />
-        <div className="flex marquee w-max items-center will-change-transform">
-          {[0, 1, 2, 3].map((dup) =>
+        <div
+          className="flex w-max items-center will-change-transform"
+          style={{ animation: "marqueeScroll 32s linear infinite" }}
+        >
+          {[0, 1].map((dup) =>
             items.map((kind) => (
               <BrandLogo key={`${dup}-${kind}`} kind={kind} />
             ))

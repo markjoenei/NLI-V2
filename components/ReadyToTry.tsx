@@ -34,15 +34,12 @@ export default function ReadyToTry() {
               <span className="h-1.5 w-1.5 rounded-full bg-[#5b4ef7]" />
               Vertical AI agents
             </span>
-            <h2 className="display-text-lg text-[36px] sm:text-[48px] md:text-[64px] font-semibold max-w-[18ch] tracking-tight text-balance">
-              Vertical AI Agents that{" "}
-              <span className="editorial text-[#989898]">execute</span>, not just assist
+            <h2 className="display-text-lg text-[28px] sm:text-[36px] md:text-[44px] lg:text-[53px] font-semibold max-w-[18ch] tracking-tight text-balance">
+              <span className="block">Your Operation Has a Next Layer.</span>
+              <span className="editorial text-[#989898] block">Let&apos;s Build It.</span>
             </h2>
             <p className="mt-6 text-[16px] md:text-[18px] text-white/70 max-w-[46ch] text-pretty leading-relaxed">
-              From digital workflows to autonomous operational execution, our AI agents streamline enterprise functions.
-            </p>
-            <p className="mt-4 text-[16px] md:text-[18px] text-white/70 max-w-[46ch] text-pretty leading-relaxed">
-              Enterprise AI systems built for real business outcomes.
+              The gap between where your business is and where AI can take it isn&apos;t a technology problem. It&apos;s a deployment problem. We solve it.
             </p>
             <div className="mt-9 flex flex-wrap gap-3">
               <Link href="#" className="btn-primary h-12 px-7 text-[15px] shine glow-brand">

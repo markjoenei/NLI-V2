@@ -1,36 +1,82 @@
 import Link from "next/link";
 import Image from "next/image";
 
-type CardKind = "infra" | "automation" | "analytics" | "integration";
+type CardKind =
+  | "generative"
+  | "automation"
+  | "predictive"
+  | "agents"
+  | "revenue"
+  | "executive";
 
-const cards: { kind: CardKind; title: string; body: string; image: string; role: string }[] = [
+type Card = {
+  kind: CardKind;
+  title: string;
+  body: string;
+  subhead?: string;
+  bullets?: string[];
+  image?: string;
+};
+
+const cards: Card[] = [
   {
-    kind: "infra",
+    kind: "generative",
     title: "Generative Intelligence",
-    body: "Built to support scalable enterprise deployments with advanced AI environments.",
-    image: "/generated/team1.jpg",
-    role: "Head of Platform Engineering",
+    subhead: "Your content, communications, and creation tasks — handled.",
+    body: "Language models trained on your data, integrated into your workflows, producing output your team would be proud to put their name on. No generic templates. No hallucinations. No handholding required.",
+    bullets: [
+      "Custom LLM Integration",
+      "AI Content Engines built on your brand voice",
+      "Workflow-native generation — inside your tools, not alongside them",
+    ],
+    image: "/generated/generative-intelligence.jpg",
   },
   {
     kind: "automation",
-    title: "Automation at Scale",
-    body: "Optimize workflows for large-scale operations while improving productivity.",
-    image: "/generated/team2.jpg",
-    role: "VP, Business Operations",
+    title: "Operational Automation",
+    subhead: "If a human is doing it manually, a machine should be doing it better.",
+    body: "We map your highest-friction processes and eliminate them — not with bots that break, but with intelligent automation that handles exceptions, escalates correctly, and learns over time.",
+    bullets: [
+      "End-to-end process automation",
+      "Exception handling and intelligent escalation",
+      "24/7 operation, zero handoff errors",
+    ],
+    image: "/generated/operational-automation.jpg",
   },
   {
-    kind: "analytics",
+    kind: "predictive",
     title: "Predictive Intelligence",
-    body: "Build smarter business intelligence strategies with predictive analytics.",
-    image: "/generated/team3.jpg",
-    role: "Chief Data Officer",
+    subhead: "Your data knows what's coming. You just can't hear it yet.",
+    body: "We build predictive systems that surface the signal inside your noise — demand shifts, revenue risk, operational bottlenecks — before they cost you. In real time. Without a data scientist in the room.",
+    bullets: [
+      "Demand and revenue forecasting",
+      "Real-time anomaly detection and risk signals",
+      "Decisions ready to act on, not just read",
+    ],
+    image: "/generated/predictive-intelligence.png",
   },
   {
-    kind: "integration",
+    kind: "agents",
     title: "Vertical AI Agents",
-    body: "Integrate AI systems into existing operational infrastructure and business processes.",
-    image: "/generated/team4.jpg",
-    role: "Director of AI Strategy",
+    subhead: "Not chatbots. Not assistants. Agents that execute.",
+    body: "Our vertical agents don't generate a suggestion and wait for a human to act on it. They handle the task — customer interactions, internal operations, order processing, support resolution — end to end. They escalate only when it genuinely requires a person.",
+    bullets: [
+      "Customer-facing agents: engage, resolve, convert",
+      "Operations agents: process, route, complete",
+      "Purpose-built per vertical — not repurposed generic models",
+    ],
+    image: "/generated/vertical-ai-agents.jpg",
+  },
+  {
+    kind: "revenue",
+    title: "Revenue Intelligence",
+    subhead: "The revenue you're leaving on the table has a name. We find it.",
+    body: "Weak follow-up. Slow response times. Pricing gaps. Drop-off points you don't know exist. We install AI systems that detect where your revenue is leaking — and fix it before the next quarter closes.",
+    bullets: [
+      "Revenue leak detection and root cause analysis",
+      "Conversion and pipeline optimization",
+      "Autonomous outreach and follow-up sequences",
+    ],
   },
 ];
 
@@ -45,56 +91,26 @@ type HeadingProps = {
   theme?: Theme;
 };
 
-const FAILURE_ITEMS: { label: string; text: string; icon: React.ReactNode }[] = [
+const FAILURE_ITEMS: { label: string; text: string; image: string }[] = [
   {
     label: "Broken foundation",
     text: "They're built on top of broken processes instead of redesigning them.",
-    icon: (
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
-        <path d="M4 8h6l2-2h8" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
-        <path d="M4 16h6l2 2h8" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
-        <path d="M9 11l3 1-3 1" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" fill="none" />
-        <path d="M15 7v10" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeDasharray="2 2.5" opacity="0.6" />
-      </svg>
-    ),
+    image: "/generated/broken-foundation.jpg",
   },
   {
     label: "Dead-end insights",
     text: "They produce insights nobody acts on.",
-    icon: (
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
-        <path d="M3 17l5-4 4 3 8-7" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
-        <circle cx="20" cy="9" r="1.6" fill="currentColor" />
-        <path d="M9 21h6" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" opacity="0.5" />
-      </svg>
-    ),
+    image: "/generated/dead-end-insights.avif",
   },
   {
     label: "Vendor lock-in",
     text: "They're maintained by vendors, not owned by your team.",
-    icon: (
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
-        <rect x="5" y="10" width="14" height="9" rx="1.5" stroke="currentColor" strokeWidth="1.6" />
-        <path d="M8 10V7a4 4 0 0 1 8 0v3" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
-        <circle cx="12" cy="14.5" r="1.3" fill="currentColor" />
-      </svg>
-    ),
+    image: "/generated/vendor-lock-in.jpg",
   },
   {
     label: "Demo-grade, not prod-grade",
     text: "They impress in demos and disappear in production.",
-    icon: (
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
-        <path
-          d="M4 6h16M4 6v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V6"
-          stroke="currentColor"
-          strokeWidth="1.6"
-          strokeLinecap="round"
-        />
-        <path d="M9 21h6M12 18v3" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
-        <path d="M9 11l3 3 3-3" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
-      </svg>
-    ),
+    image: "/generated/demo-grade.jpg",
   },
 ];
 
@@ -103,21 +119,40 @@ export const FAILURE_LIST_BODY = (
     {FAILURE_ITEMS.map((item) => (
       <div
         key={item.label}
-        className="group relative flex flex-col gap-5 rounded-2xl bg-white/[0.04] ring-1 ring-white/[0.08] hover:ring-white/[0.16] hover:bg-white/[0.06] transition-colors p-7 md:p-8 min-h-[220px]"
+        className="group relative flex flex-col rounded-2xl bg-white/[0.04] ring-1 ring-white/[0.08] hover:ring-white/[0.16] hover:bg-white/[0.06] transition-colors overflow-hidden"
       >
-        <span
-          className="inline-flex h-12 w-12 items-center justify-center rounded-xl shrink-0 text-[#ffb59a] ring-1 ring-[#ff7a59]/25"
-          style={{
-            background:
-              "linear-gradient(140deg, rgba(255,122,89,0.22) 0%, rgba(255,122,89,0.06) 100%)",
-          }}
-        >
-          {item.icon}
-        </span>
-        <div className="min-w-0">
-          <p className="text-[11px] uppercase tracking-[0.18em] font-semibold text-[#ffb59a]/85 mb-2">
-            {item.label}
-          </p>
+        <div className="relative aspect-[16/10] overflow-hidden">
+          <Image
+            src={item.image}
+            alt={item.label}
+            fill
+            className="object-cover transition-transform duration-700 group-hover:scale-[1.04]"
+            style={{ filter: "saturate(0.7)" }}
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+          />
+          <div
+            aria-hidden
+            className="absolute inset-0"
+            style={{
+              background:
+                "linear-gradient(180deg, rgba(8,8,13,0.25) 0%, rgba(8,8,13,0.55) 60%, rgba(8,8,13,0.85) 100%)",
+            }}
+          />
+          <div
+            aria-hidden
+            className="absolute inset-0 mix-blend-overlay"
+            style={{
+              background:
+                "linear-gradient(135deg, rgba(255,122,89,0.45) 0%, transparent 55%, rgba(255,122,89,0.18) 100%)",
+            }}
+          />
+          <div className="absolute bottom-3 left-3 right-3">
+            <span className="text-[10px] uppercase tracking-[0.18em] font-bold text-[#ffb59a] bg-black/45 backdrop-blur ring-1 ring-[#ff7a59]/30 rounded px-2 py-1">
+              {item.label}
+            </span>
+          </div>
+        </div>
+        <div className="p-6 md:p-7 min-w-0 flex-1">
           <p className="text-[15.5px] md:text-[16.5px] leading-[1.55] text-white/80 text-pretty">
             {item.text}
           </p>
@@ -180,7 +215,7 @@ export default function LovedByUsers({
             {eyebrow}
           </p>
           <h2
-            className={`display-text text-[36px] sm:text-[52px] md:text-[64px] font-semibold text-balance tracking-tight ${
+            className={`display-text text-[28px] sm:text-[36px] md:text-[44px] lg:text-[53px] font-semibold text-balance tracking-tight ${
               isLight ? "text-[#08080d]" : "text-white"
             }`}
           >
@@ -191,7 +226,7 @@ export default function LovedByUsers({
         {showCTA && (
           <div className="flex flex-wrap justify-center gap-3 mt-8">
             <Link href="#" className="btn-primary h-11 px-5 text-[14px] shine">
-              Book a demo
+              Book a Strategy Call
               <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
                 <path d="M3 6H9M9 6L6 3M9 6L6 9" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
@@ -210,35 +245,89 @@ export default function LovedByUsers({
         )}
 
         {showCards && (
-          <div className="mt-16 md:mt-20 grid md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5">
-            {cards.map((c) => (
-              <article
-                key={c.title}
-                className={`group relative rounded-3xl overflow-hidden flex flex-col card-hover h-full ${
-                  isLight
-                    ? "bg-white ring-1 ring-black/[0.06] shadow-[0_12px_40px_-20px_rgba(8,8,13,0.18)]"
-                    : "bg-white/[0.04] ring-1 ring-white/[0.08]"
-                }`}
-              >
-                <CardVisual kind={c.kind} image={c.image} role={c.role} />
-                <div className="p-6 md:p-7 flex flex-col flex-1">
-                  <h3
-                    className={`text-[17px] md:text-[19px] font-semibold leading-[1.2] tracking-tight ${
-                      isLight ? "text-[#08080d]" : "text-white"
-                    }`}
-                  >
-                    {c.title}
-                  </h3>
-                  <p
-                    className={`mt-3 text-[13.5px] md:text-[14px] flex-1 leading-relaxed ${
-                      isLight ? "text-[#4a4a55]" : "text-white/65"
-                    }`}
-                  >
-                    {c.body}
-                  </p>
-                </div>
-              </article>
-            ))}
+          <div
+            className="group/marquee mt-16 md:mt-20 relative overflow-hidden -mx-5 md:-mx-8"
+            style={{
+              maskImage:
+                "linear-gradient(90deg, transparent 0, #000 18%, #000 82%, transparent 100%)",
+              WebkitMaskImage:
+                "linear-gradient(90deg, transparent 0, #000 18%, #000 82%, transparent 100%)",
+            }}
+          >
+            <div
+              className="flex w-max gap-4 md:gap-5 px-5 md:px-8 group-hover/marquee:[animation-play-state:paused]"
+              style={{ animation: "marqueeScroll 40s linear infinite" }}
+            >
+              {[...cards, ...cards].map((c, idx) => (
+                <article
+                  key={`${c.title}-${idx}`}
+                  aria-hidden={idx >= cards.length}
+                  className={`group relative rounded-3xl overflow-hidden flex flex-col card-hover w-[300px] md:w-[340px] lg:w-[360px] shrink-0 ${
+                    isLight
+                      ? "bg-white ring-1 ring-black/[0.06] shadow-[0_12px_40px_-20px_rgba(8,8,13,0.18)]"
+                      : "bg-white/[0.04] ring-1 ring-white/[0.08]"
+                  }`}
+                >
+                  {c.image ? (
+                    <div className="relative aspect-[4/3] w-full overflow-hidden bg-[#0a0a14]">
+                      <Image
+                        src={c.image}
+                        alt={c.title}
+                        fill
+                        className="object-cover transition-transform duration-700 group-hover:scale-[1.04]"
+                        sizes="360px"
+                      />
+                    </div>
+                  ) : (
+                    <CardArt kind={c.kind} />
+                  )}
+                  <div className="p-6 md:p-7 flex flex-col flex-1">
+                    <h3
+                      className={`text-[17px] md:text-[19px] font-semibold leading-[1.2] tracking-tight ${
+                        isLight ? "text-[#08080d]" : "text-white"
+                      }`}
+                    >
+                      {c.title}
+                    </h3>
+                    {c.subhead && (
+                      <p
+                        className={`mt-2.5 text-[13px] md:text-[13.5px] font-semibold tracking-tight ${
+                          isLight ? "text-[#5b4ef7]" : "text-[#a5b4ff]"
+                        }`}
+                      >
+                        {c.subhead}
+                      </p>
+                    )}
+                    <p
+                      className={`mt-3 text-[13.5px] md:text-[14px] leading-relaxed ${
+                        isLight ? "text-[#4a4a55]" : "text-white/65"
+                      }`}
+                    >
+                      {c.body}
+                    </p>
+                    {c.bullets && c.bullets.length > 0 && (
+                      <ul className="mt-3 space-y-1.5">
+                        {c.bullets.map((b) => (
+                          <li
+                            key={b}
+                            className={`flex items-start gap-2 text-[12.5px] md:text-[13px] leading-snug ${
+                              isLight ? "text-[#4a4a55]" : "text-white/70"
+                            }`}
+                          >
+                            <span
+                              className={`mt-1.5 h-1 w-1 rounded-full shrink-0 ${
+                                isLight ? "bg-[#5b4ef7]" : "bg-[#a5b4ff]"
+                              }`}
+                            />
+                            <span>{b}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    )}
+                  </div>
+                </article>
+              ))}
+            </div>
           </div>
         )}
 
@@ -247,156 +336,312 @@ export default function LovedByUsers({
   );
 }
 
-function CardVisual({ kind, image, role }: { kind: CardKind; image: string; role: string }) {
-  const objectPosition = kind === "infra" ? "50% 0%" : "50% 50%";
+const PANEL_BG: Record<CardKind, string> = {
+  generative: "linear-gradient(135deg, #1c0a2e 0%, #15082a 60%, #08081a 100%)",
+  automation: "linear-gradient(135deg, #1f1228 0%, #2a1020 55%, #08081a 100%)",
+  predictive: "linear-gradient(135deg, #0c1230 0%, #0e1c40 55%, #06081a 100%)",
+  agents: "linear-gradient(135deg, #0a1c28 0%, #0e1d36 55%, #07091a 100%)",
+  revenue: "linear-gradient(135deg, #0a1f1a 0%, #0e2030 55%, #07091a 100%)",
+  executive: "linear-gradient(135deg, #160a2c 0%, #1c0e3a 55%, #08081a 100%)",
+};
+
+function CardArt({ kind }: { kind: CardKind }) {
   return (
-    <div className="relative aspect-[4/3] w-full overflow-hidden bg-[#0a0a14]">
-      <Image
-        src={image}
-        alt={role}
-        fill
-        className="object-cover transition-transform duration-700 group-hover:scale-[1.04]"
-        style={{ objectPosition }}
-        sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw"
-      />
-      {/* Top fade for floating tag legibility */}
+    <div
+      className="relative aspect-[4/3] w-full overflow-hidden"
+      style={{ background: PANEL_BG[kind] }}
+    >
       <div
         aria-hidden
-        className="absolute inset-0"
+        className="pointer-events-none absolute -top-20 left-1/2 -translate-x-1/2 h-[220px] w-[280px] blur-3xl opacity-40"
         style={{
           background:
-            "linear-gradient(180deg, rgba(8,8,13,0.45) 0%, transparent 30%, transparent 55%, rgba(8,8,13,0.7) 100%)",
+            "radial-gradient(closest-side, rgba(91,78,247,0.4), transparent 70%)",
         }}
       />
-      {/* Tinted overlay matching theme */}
-      <ThemeTint kind={kind} />
-
-      {/* Top-left role badge — humanizes the card */}
-      <div className="absolute top-3 left-3 inline-flex items-center gap-1.5 rounded-full bg-white/10 backdrop-blur-md ring-1 ring-white/15 px-2.5 py-1">
-        <span className="h-1.5 w-1.5 rounded-full bg-[#22c55e] pulse-soft" />
-        <span className="text-[9.5px] font-semibold text-white tracking-tight">{role}</span>
+      <div className="relative h-full px-6 py-6">
+        {kind === "generative" && <GenerativePanel />}
+        {kind === "automation" && <AutomationPanel />}
+        {kind === "predictive" && <PredictivePanel />}
+        {kind === "agents" && <AgentsPanel />}
+        {kind === "revenue" && <RevenuePanel />}
+        {kind === "executive" && <ExecutivePanel />}
       </div>
-
-      {/* Bottom-right thematic indicator */}
-      {kind === "infra" && <InfraOverlay />}
-      {kind === "automation" && <AutomationOverlay />}
-      {kind === "analytics" && <AnalyticsOverlay />}
-      {kind === "integration" && <IntegrationOverlay />}
     </div>
   );
 }
 
-function ThemeTint({ kind }: { kind: CardKind }) {
-  const tints: Record<CardKind, string> = {
-    infra:
-      "linear-gradient(135deg, rgba(91,78,247,0.32) 0%, transparent 50%, rgba(91,78,247,0.18) 100%)",
-    automation:
-      "linear-gradient(135deg, rgba(192,38,211,0.28) 0%, transparent 50%, rgba(109,0,204,0.2) 100%)",
-    analytics:
-      "linear-gradient(135deg, rgba(91,78,247,0.3) 0%, transparent 50%, rgba(34,197,94,0.18) 100%)",
-    integration:
-      "linear-gradient(135deg, rgba(91,78,247,0.3) 0%, transparent 50%, rgba(255,125,107,0.18) 100%)",
-  };
-  return <div aria-hidden className="absolute inset-0 mix-blend-overlay" style={{ background: tints[kind] }} />;
+function PanelHeader({ label, status }: { label: string; status?: string }) {
+  return (
+    <div className="flex items-center justify-between mb-4">
+      <div className="flex items-center gap-1.5">
+        <span className="h-1.5 w-1.5 rounded-full bg-[#22c55e] pulse-soft" />
+        <span className="text-[10px] uppercase tracking-[0.16em] font-bold text-white/80">{label}</span>
+      </div>
+      {status && (
+        <span className="text-[10px] font-semibold text-white/55 tabular-nums">{status}</span>
+      )}
+    </div>
+  );
 }
 
-function InfraOverlay() {
+function PanelFooter({ left, right, accent = "#34d399" }: { left: string; right: string; accent?: string }) {
   return (
-    <div className="absolute bottom-3 left-3 right-3 flex flex-col gap-1.5">
-      <div className="inline-flex w-fit items-center gap-1.5 rounded-md bg-black/55 backdrop-blur ring-1 ring-white/15 px-2 py-1">
-        <span className="h-1 w-1 rounded-full bg-[#22c55e] pulse-soft" />
-        <span className="text-[8.5px] font-semibold text-white/95">12 regions · 99.99% uptime</span>
-      </div>
-      <div className="flex gap-1 max-w-full">
-        {["us-east", "eu-west", "ap-south", "us-west"].map((r, i) => (
-          <span
-            key={r}
-            className="text-[8px] font-mono px-1.5 py-0.5 rounded bg-white/15 backdrop-blur ring-1 ring-white/15 text-white/85 truncate"
-            style={{ opacity: 1 - i * 0.18 }}
-          >
-            {r}
-          </span>
+    <div className="mt-4 flex items-center justify-between text-[10.5px] font-semibold">
+      <span className="text-white/60">{left}</span>
+      <span style={{ color: accent }}>{right}</span>
+    </div>
+  );
+}
+
+function GeneratedTile({ bg }: { bg: string }) {
+  return (
+    <div
+      className="relative rounded-lg ring-1 ring-white/15 overflow-hidden"
+      style={{ background: bg }}
+    >
+      <div
+        className="absolute inset-0 mix-blend-overlay"
+        style={{
+          background:
+            "radial-gradient(70% 60% at 30% 25%, rgba(255,255,255,0.5) 0%, transparent 65%)",
+        }}
+      />
+    </div>
+  );
+}
+
+function GenerativePanel() {
+  const tiles = [
+    "linear-gradient(135deg, #f24e1e, #c026d3)",
+    "linear-gradient(135deg, #5b4ef7, #22d3ee)",
+    "linear-gradient(135deg, #ff7d6b, #5b4ef7)",
+    "linear-gradient(135deg, #f59e0b, #c026d3)",
+    "linear-gradient(135deg, #22c55e, #5b4ef7)",
+    "linear-gradient(135deg, #c026d3, #ff7d6b)",
+  ];
+  return (
+    <div className="h-full flex flex-col">
+      <PanelHeader label="AI Studio" status="12 models" />
+      <div className="grid grid-cols-3 grid-rows-2 gap-2 flex-1 min-h-0">
+        {tiles.map((bg, i) => (
+          <GeneratedTile key={i} bg={bg} />
         ))}
       </div>
+      <PanelFooter left="text · image · video" right="multi-modal" accent="#c4b5fd" />
     </div>
   );
 }
 
-function AutomationOverlay() {
+function AutomationPanel() {
+  const steps = [
+    { label: "Webhook", color: "#ff7d6b" },
+    { label: "Enrich", color: "#c026d3" },
+    { label: "Decide", color: "#5b4ef7" },
+    { label: "Sync", color: "#34d399" },
+  ];
   return (
-    <div className="absolute bottom-3 left-3 right-3 flex items-end justify-between gap-2">
-      <div className="inline-flex items-center gap-1.5 rounded-md bg-black/55 backdrop-blur ring-1 ring-white/15 px-2 py-1">
-        <span
-          className="inline-flex h-3 w-3 items-center justify-center rounded text-white"
-          style={{
-            background:
-              "linear-gradient(135deg, #f24e1e 0%, #c026d3 55%, #6d00cc 100%)",
-          }}
-        >
-          <svg width="7" height="7" viewBox="0 0 14 14" fill="none">
-            <path d="M7 2v3M7 9v3M2 7h3M9 7h3" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" />
-          </svg>
-        </span>
-        <span className="text-[8.5px] font-semibold text-white/95">1,284 ops/min</span>
+    <div className="h-full flex flex-col">
+      <PanelHeader label="Workflow · live" status="1,284 ops/min" />
+      <div className="flex-1 flex items-center">
+        <div className="relative w-full">
+          <div
+            className="absolute left-4 right-4 top-1/2 -translate-y-1/2 h-px"
+            style={{
+              background:
+                "linear-gradient(90deg, #ff7d6b 0%, #c026d3 35%, #5b4ef7 70%, #34d399 100%)",
+            }}
+          />
+          <div className="relative flex items-center justify-between">
+            {steps.map((s) => (
+              <div key={s.label} className="flex flex-col items-center gap-2">
+                <span
+                  className="inline-flex h-7 w-7 items-center justify-center rounded-lg ring-1 ring-white/30 shadow-[0_4px_12px_-2px_rgba(0,0,0,0.4)]"
+                  style={{ background: s.color }}
+                >
+                  <span className="h-1.5 w-1.5 rounded-full bg-white" />
+                </span>
+                <span className="text-[9.5px] font-semibold text-white/80 tracking-tight">
+                  {s.label}
+                </span>
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
-      <div className="flex -space-x-1">
-        {["#ea4335", "#c026d3", "#36c5f0", "#10b981"].map((c, i) => (
-          <span
+      <PanelFooter left="Avg 240ms" right="99.8% success" />
+    </div>
+  );
+}
+
+function PredictivePanel() {
+  return (
+    <div className="h-full flex flex-col">
+      <PanelHeader label="Q3 Forecast" status="94% confidence" />
+      <div className="flex-1 relative min-h-0">
+        <svg viewBox="0 0 200 70" className="absolute inset-0 h-full w-full" preserveAspectRatio="none">
+          <defs>
+            <linearGradient id="pred-fill" x1="0" x2="0" y1="0" y2="1">
+              <stop offset="0%" stopColor="rgba(91,78,247,0.5)" />
+              <stop offset="100%" stopColor="rgba(91,78,247,0)" />
+            </linearGradient>
+          </defs>
+          <line x1="120" y1="4" x2="120" y2="66" stroke="rgba(255,255,255,0.18)" strokeWidth="0.7" strokeDasharray="2.5 2.5" />
+          <path d="M120 26 L 160 14 L 200 4 L 200 70 L 120 70 Z" fill="url(#pred-fill)" />
+          <path
+            d="M0 56 L 25 50 L 50 52 L 75 40 L 100 33 L 120 26"
+            fill="none"
+            stroke="#a5b4ff"
+            strokeWidth="2.2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+          <path
+            d="M120 26 L 160 14 L 200 4"
+            fill="none"
+            stroke="#a5b4ff"
+            strokeWidth="2.2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeDasharray="3.5 2.5"
+          />
+          <circle cx="120" cy="26" r="3.5" fill="#fff" />
+          <circle cx="120" cy="26" r="6" fill="none" stroke="#fff" strokeOpacity="0.4" strokeWidth="1" />
+        </svg>
+        <span className="absolute top-0 left-[60%] text-[9px] font-bold text-white/80 tracking-tight">
+          now
+        </span>
+      </div>
+      <PanelFooter left="Pipeline ARR" right="+22.4% Q/Q" />
+    </div>
+  );
+}
+
+function AgentsPanel() {
+  const verticals = [
+    { label: "Sales", color: "#5b4ef7" },
+    { label: "Finance", color: "#22d3ee" },
+    { label: "HR", color: "#c026d3" },
+    { label: "Support", color: "#34d399" },
+    { label: "Legal", color: "#f59e0b" },
+    { label: "Ops", color: "#ff7d6b" },
+  ];
+  return (
+    <div className="h-full flex flex-col">
+      <PanelHeader label="Vertical Agents" status="12 active" />
+      <div className="grid grid-cols-2 gap-1.5 flex-1 min-h-0">
+        {verticals.map((v) => (
+          <div
+            key={v.label}
+            className="flex items-center gap-2 rounded-lg bg-white/[0.06] ring-1 ring-white/10 px-2.5 py-1.5"
+          >
+            <span
+              className="h-2 w-2 rounded-full shrink-0"
+              style={{
+                background: v.color,
+                boxShadow: `0 0 0 3px ${v.color}26`,
+              }}
+            />
+            <span className="text-[10px] font-semibold text-white/90 tracking-tight truncate">
+              {v.label}
+            </span>
+          </div>
+        ))}
+      </div>
+      <PanelFooter left="200+ verticals" right="● Online" />
+    </div>
+  );
+}
+
+function RevenuePanel() {
+  const bars = [42, 58, 50, 72, 84, 95];
+  return (
+    <div className="h-full flex flex-col">
+      <PanelHeader label="Pipeline · ARR" status="$1.24M" />
+      <div className="flex-1 flex items-end gap-1.5 min-h-0">
+        {bars.map((h, i) => (
+          <div
             key={i}
-            className="h-4 w-4 rounded-full ring-1 ring-white/30 shadow"
-            style={{ background: c }}
+            className="flex-1 rounded-t-md"
+            style={{
+              height: `${h}%`,
+              background:
+                i === bars.length - 1
+                  ? "linear-gradient(180deg, #34d399 0%, #5b4ef7 100%)"
+                  : "linear-gradient(180deg, rgba(165,180,255,0.55) 0%, rgba(91,78,247,0.18) 100%)",
+              boxShadow:
+                i === bars.length - 1
+                  ? "0 -8px 20px -8px rgba(91,78,247,0.45)"
+                  : undefined,
+            }}
           />
         ))}
       </div>
+      <PanelFooter left="Q1 → Q6 forecast" right="+18.4% YoY" />
     </div>
   );
 }
 
-function AnalyticsOverlay() {
+function ExecutivePanel() {
+  const kpis = [
+    { label: "ROI", value: "3.4×", color: "#34d399" },
+    { label: "Adoption", value: "82%", color: "#a5b4ff" },
+    { label: "TTV", value: "11w", color: "#f5b86d" },
+  ];
   return (
-    <div className="absolute bottom-3 left-3 right-3 rounded-md bg-black/55 backdrop-blur ring-1 ring-white/15 px-2.5 py-1.5 flex items-center justify-between gap-2">
-      <div>
-        <div className="text-[7.5px] uppercase tracking-wider text-white/55 font-semibold">Revenue</div>
-        <div className="text-[11px] font-semibold text-white tracking-tight tabular-nums leading-none mt-0.5">$1.24M</div>
-      </div>
-      <svg width="60" height="24" viewBox="0 0 60 24" fill="none">
-        <path
-          d="M0 18 L 10 14 L 18 16 L 26 8 L 38 10 L 50 4 L 60 2"
-          stroke="#a5b4ff"
-          strokeWidth="1.6"
-          fill="none"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-        <circle cx="60" cy="2" r="2" fill="#a5b4ff" />
-      </svg>
-      <div className="text-[9px] font-semibold text-[#34d399]">+18.4%</div>
-    </div>
-  );
-}
-
-function IntegrationOverlay() {
-  return (
-    <div className="absolute bottom-3 left-3 right-3 flex items-end justify-between gap-2">
-      <div className="inline-flex items-center gap-1.5 rounded-md bg-black/55 backdrop-blur ring-1 ring-white/15 px-2 py-1">
-        <span className="h-1 w-1 rounded-full bg-[#22c55e] pulse-soft" />
-        <span className="text-[8.5px] font-semibold text-white/95">200+ integrations</span>
-      </div>
-      <div className="flex -space-x-1.5">
-        {[
-          { bg: "#ea4335", letter: "G" },
-          { bg: "#1a73e8", letter: "S" },
-          { bg: "#7c3aed", letter: "N" },
-          { bg: "#10b981", letter: "H" },
-        ].map((a, i) => (
-          <span
-            key={i}
-            className="h-5 w-5 rounded-md flex items-center justify-center text-white text-[8.5px] font-bold ring-1 ring-white/25 shadow"
-            style={{ background: a.bg }}
+    <div className="h-full flex flex-col">
+      <PanelHeader label="FY26 Roadmap" status="2 of 4 shipped" />
+      <div className="grid grid-cols-3 gap-2 mb-3">
+        {kpis.map((k) => (
+          <div
+            key={k.label}
+            className="rounded-lg bg-white/[0.06] ring-1 ring-white/10 px-2 py-2"
           >
-            {a.letter}
-          </span>
+            <div className="text-[8.5px] uppercase tracking-[0.12em] text-white/55 font-semibold leading-none">
+              {k.label}
+            </div>
+            <div
+              className="text-[15px] font-semibold tracking-tight tabular-nums leading-none mt-1.5"
+              style={{ color: k.color }}
+            >
+              {k.value}
+            </div>
+          </div>
         ))}
+      </div>
+      <div className="flex-1 relative min-h-0">
+        <svg viewBox="0 0 200 36" className="absolute inset-0 h-full w-full" preserveAspectRatio="none">
+          <line x1="14" y1="14" x2="186" y2="14" stroke="rgba(255,255,255,0.18)" strokeWidth="0.8" />
+          {["Q1", "Q2", "Q3", "Q4"].map((q, i) => {
+            const x = 22 + i * 52;
+            const active = i <= 1;
+            return (
+              <g key={q}>
+                {active && (
+                  <circle cx={x} cy={14} r="8" fill="#a5b4ff" fillOpacity="0.18" />
+                )}
+                <circle
+                  cx={x}
+                  cy={14}
+                  r="4"
+                  fill={active ? "#a5b4ff" : "rgba(255,255,255,0.12)"}
+                  stroke={active ? "#a5b4ff" : "rgba(255,255,255,0.3)"}
+                  strokeWidth="1"
+                />
+                <text
+                  x={x}
+                  y={32}
+                  textAnchor="middle"
+                  fontSize="9"
+                  fontWeight="700"
+                  fill={active ? "rgba(255,255,255,0.9)" : "rgba(255,255,255,0.5)"}
+                >
+                  {q}
+                </text>
+              </g>
+            );
+          })}
+        </svg>
       </div>
     </div>
   );

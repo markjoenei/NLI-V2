@@ -5,21 +5,18 @@ const cards: {
   title: string;
   body: string;
   badge: string;
-  cta: string;
 }[] = [
   {
     platform: "microsoft",
     title: "Microsoft",
     body: "Agent Platform AI solutions within Microsoft environments, including Azure AI Foundry, Microsoft Teams, Microsoft 365 Copilot, and enterprise cloud infrastructure.",
     badge: "Microsoft Partner",
-    cta: "Explore Microsoft stack",
   },
   {
     platform: "aws",
     title: "AWS",
     body: "Agent Platform and AI solutions integrated with AWS services including Amazon Bedrock, Amazon Q, and Amazon SageMaker for enterprise-scale deployment.",
     badge: "AWS Partner",
-    cta: "Explore AWS stack",
   },
 ];
 
@@ -45,7 +42,7 @@ export default function Skills() {
           <p className="text-[11px] uppercase tracking-[0.22em] font-semibold text-white/55 mb-5">
             Partner ecosystem
           </p>
-          <h2 className="display-text text-[36px] sm:text-[48px] md:text-[60px] font-semibold text-white tracking-tight text-balance">
+          <h2 className="display-text text-[28px] sm:text-[36px] md:text-[44px] lg:text-[53px] font-semibold text-white tracking-tight text-balance">
             The skills, insights, and support to{" "}
             <span className="editorial text-[#989898]">help you scale</span>
           </h2>
@@ -69,14 +66,6 @@ export default function Skills() {
                 <p className="mt-3 text-[14.5px] md:text-[15px] leading-relaxed text-white/65 max-w-[44ch]">
                   {c.body}
                 </p>
-                <button className="reveal-on-hover mt-6 self-start inline-flex items-center gap-1.5 text-[13.5px] font-semibold text-white">
-                  {c.cta}
-                  <span className="reveal-arrow">
-                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-                      <path d="M3 6H9M9 6L6 3M9 6L6 9" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
-                    </svg>
-                  </span>
-                </button>
               </div>
             </article>
           ))}

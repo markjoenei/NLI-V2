@@ -52,14 +52,8 @@ export default function Navbar() {
           </nav>
         </div>
         <div className="hidden lg:flex items-center gap-2">
-          <Link
-            href="#"
-            className="px-3 py-2 text-[14px] font-medium text-[#1a1a2a] hover:text-black/60 transition-colors"
-          >
-            Sign in
-          </Link>
           <Link href="#" className="btn-dark h-9 px-4 text-[13px]">
-            Book a demo
+            Book a Strategy Call
             <svg width="11" height="11" viewBox="0 0 12 12" fill="none" aria-hidden="true">
               <path d="M3 6H9M9 6L6 3M9 6L6 9" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
@@ -99,11 +93,8 @@ export default function Navbar() {
               </button>
             ))}
             <div className="flex flex-col gap-3 pt-5 pb-3">
-              <Link href="#" className="btn-secondary h-11 px-5 text-[14px]">
-                Sign in
-              </Link>
               <Link href="#" className="btn-dark h-11 px-5 text-[14px]">
-                Book a demo
+                Book a Strategy Call
               </Link>
             </div>
           </nav>

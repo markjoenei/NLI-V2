@@ -29,6 +29,29 @@ export default function Home() {
           showCards={false}
         />
         <LovedByUsers theme="light" showCTA={false} />
+        <FAQ
+          theme="dark"
+          headingTop="Enterprise-Grade from Day One."
+          headingBottom="Not After You've Outgrown Us."
+          items={[
+            {
+              q: "Integrates with your stack — doesn't replace it",
+              a: "CRM, ERP, cloud infrastructure, data warehouses. We connect the intelligence layer to what you already own.",
+            },
+            {
+              q: "Scales without breaking",
+              a: "Ten automations or ten thousand. The architecture holds.",
+            },
+            {
+              q: "Security and compliance built in",
+              a: "Not bolted on afterward. Enterprise security is a starting point, not an upgrade.",
+            },
+            {
+              q: "Visibility at every level",
+              a: "Your team sees what's running. Your leadership sees what it's producing. No black boxes.",
+            },
+          ]}
+        />
         <Fortune100 />
         <Skills />
         <FAQ />

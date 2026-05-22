@@ -36,7 +36,7 @@ export default function FreeAIVideoTool() {
                 <span className="h-1.5 w-1.5 rounded-full bg-[#5b4ef7]" />
                 Free tool · No signup
               </span>
-              <h2 className="display-text text-[36px] sm:text-[48px] md:text-[60px] font-semibold max-w-[14ch] tracking-tight">
+              <h2 className="display-text text-[28px] sm:text-[36px] md:text-[44px] lg:text-[53px] font-semibold max-w-[14ch] tracking-tight">
                 Try our free{" "}
                 <span className="editorial text-white/90">AI Video Tool</span>
               </h2>

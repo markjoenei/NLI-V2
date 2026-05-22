@@ -3,20 +3,16 @@ import Logo from "./Logo";
 
 const columns = [
   {
-    title: "Use cases",
-    items: ["Learning & Development", "Sales Enablement", "Marketing", "Customer Service", "Information Security", "Product"],
+    title: "Products",
+    items: ["MLOps", "AI Agents", "Reporting", "Industrial", "Retail"],
   },
   {
-    title: "Solutions",
-    items: ["For Enterprise", "For SMBs", "For Education", "For Healthcare", "For Financial Services", "For Government"],
-  },
-  {
-    title: "Platform",
-    items: ["AI Avatars", "AI Voiceovers", "AI Video Editor", "AI Screen Recorder", "Video Translation", "Free AI Video Maker"],
+    title: "Industries",
+    items: ["Retail", "Manufacturing", "Healthcare", "Financial Services", "Professional Services"],
   },
   {
     title: "Resources",
-    items: ["Help Center", "Blog", "Customer Stories", "Academy", "Community", "What's New", "Roadmap"],
+    items: ["Case Studies", "Blog", "Documentation", "Podcasts", "Webinars"],
   },
   {
     title: "Company",

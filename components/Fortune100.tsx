@@ -1,258 +1,309 @@
 "use client";
 
-import { useRef } from "react";
-import Image from "next/image";
+import Link from "next/link";
+import { useEffect, useState } from "react";
 
-type Review = {
-  image: string;
-  rating: number;
-  quote: string;
-  name: string;
-  role: string;
-  company: string;
-  result?: { value: string; label: string };
+type Stat = { value: string; label: string };
+
+type Signal = {
+  time: string;
+  dot: string;
+  label: string;
+  detail: string;
+  delta: string;
+  deltaColor: string;
 };
 
-const reviews: Review[] = [
+type Industry = {
+  name: string;
+  headline: string;
+  body: string;
+  stats: Stat[];
+  ctaLabel: string;
+  signalsHeader: string;
+  signals: Signal[];
+  chartLabel: string;
+  chartSub: string;
+  chartBars: number[];
+};
+
+const industries: Industry[] = [
   {
-    image: "/generated/pro1.jpg",
-    rating: 5,
-    quote:
-      "Next Layer transformed our entire operations stack — what used to take a team of twelve now runs autonomously, overnight, with better outcomes.",
-    name: "Priya Anand",
-    role: "Head of Operations",
-    company: "Atlas Group",
-    result: { value: "−87%", label: "time saved" },
+    name: "Retail",
+    headline:
+      "Your shelf data knows more than your buyers do. We make sure you can hear it.",
+    body: "Every item, every location, every customer signal — your retail operation is generating more intelligence than any team can process manually. We build the layer that reads it all in real time and acts before a markdown, a stockout, or a missed upsell costs you another quarter.",
+    stats: [
+      { value: "50%", label: "reduction in operational overhead" },
+      { value: "4%", label: "increase in inventory throughput" },
+      { value: "200%", label: "improvement in demand response time" },
+    ],
+    ctaLabel: "See the Retail Intelligence Layer",
+    signalsHeader: "Live shelf signals",
+    signals: [
+      {
+        time: "10:24",
+        dot: "#ff492c",
+        label: "SKU 4521",
+        detail: "markdown trigger · Aisle 3",
+        delta: "−12%",
+        deltaColor: "#ff492c",
+      },
+      {
+        time: "10:21",
+        dot: "#f5b86d",
+        label: "Store 12",
+        detail: "low stock · 2 SKUs",
+        delta: "restock",
+        deltaColor: "#a06414",
+      },
+      {
+        time: "10:19",
+        dot: "#22c55e",
+        label: "Aisle 3",
+        detail: "demand spike · weekend",
+        delta: "+18%",
+        deltaColor: "#0f6e3a",
+      },
+    ],
+    chartLabel: "Sell-through by aisle",
+    chartSub: "8 aisles · last 24h",
+    chartBars: [38, 62, 84, 52, 71, 28, 90, 45],
   },
   {
-    image: "/generated/pro2.jpg",
-    rating: 5,
-    quote:
-      "Enterprise-ready from day one. Their AI infrastructure handled our global scale without missing a beat — truly impressive engineering.",
-    name: "David Chen",
-    role: "VP Communications",
-    company: "Halberd",
-    result: { value: "$2.4M", label: "annual saving" },
-  },
-  {
-    image: "/generated/pro3.jpg",
-    rating: 5,
-    quote:
-      "What used to take 4 hours now takes 30 minutes. The ROI was immediate, and team adoption was the smoothest rollout we've ever seen.",
-    name: "Helena Ostrowski",
-    role: "Chief Data Officer",
-    company: "Norwell",
-    result: { value: "8×", label: "productivity" },
-  },
-  {
-    image: "/generated/pro4.jpg",
-    rating: 5,
-    quote:
-      "Capability, ease of use, and white-glove support — unmatched in the AI space today. We evaluated everyone. This was the obvious pick.",
-    name: "Tomás Reyes",
-    role: "VP Strategy",
-    company: "Voltic",
-    result: { value: "94%", label: "lead-fit score" },
-  },
-  {
-    image: "/generated/pro5.jpg",
-    rating: 5,
-    quote:
-      "Their predictive analytics caught a $1.2M revenue leak in week one. The platform paid for itself before we finished onboarding.",
-    name: "Marcus Lindberg",
-    role: "CFO",
-    company: "Riverstone",
-    result: { value: "$1.2M", label: "recovered" },
+    name: "Industrial & Manufacturing",
+    headline:
+      "The machine that's about to fail is already telling you. You just can't listen yet.",
+    body: "Every production line, every sensor, every maintenance log is a data stream. We build industrial intelligence systems that read those streams, predict failures before they happen, and keep your operation running — because downtime doesn't just cost you time. It costs you trust.",
+    stats: [
+      { value: "50%", label: "reduction in unplanned downtime" },
+      { value: "4%", label: "increase in production throughput" },
+      { value: "200%", label: "improvement in maintenance response speed" },
+    ],
+    ctaLabel: "See the Industrial Intelligence Layer",
+    signalsHeader: "Live machine signals",
+    signals: [
+      {
+        time: "10:24",
+        dot: "#ff492c",
+        label: "Asset 047",
+        detail: "bearing wear · Line B",
+        delta: "−0.3mm",
+        deltaColor: "#ff492c",
+      },
+      {
+        time: "10:22",
+        dot: "#f5b86d",
+        label: "Line 3",
+        detail: "service window · 06:00",
+        delta: "scheduled",
+        deltaColor: "#a06414",
+      },
+      {
+        time: "10:18",
+        dot: "#22c55e",
+        label: "Pump 12",
+        detail: "temp normalized · OK",
+        delta: "−2°C",
+        deltaColor: "#0f6e3a",
+      },
+    ],
+    chartLabel: "Uptime by line",
+    chartSub: "8 lines · last 24h",
+    chartBars: [88, 96, 74, 92, 81, 99, 68, 94],
   },
 ];
 
-export default function Fortune100() {
-  const scrollerRef = useRef<HTMLDivElement>(null);
+const INTERVAL_MS = 3000;
 
-  const scroll = (dir: "prev" | "next") => {
-    const el = scrollerRef.current;
-    if (!el) return;
-    const card = el.querySelector("article") as HTMLElement | null;
-    const cardWidth = card?.clientWidth ?? 460;
-    const gap = 24;
-    el.scrollBy({
-      left: (cardWidth + gap) * (dir === "next" ? 1 : -1),
-      behavior: "smooth",
-    });
-  };
+export default function Fortune100() {
+  const [active, setActive] = useState(0);
+
+  useEffect(() => {
+    const id = setInterval(
+      () => setActive((prev) => (prev + 1) % industries.length),
+      INTERVAL_MS,
+    );
+    return () => clearInterval(id);
+  }, []);
 
   return (
     <section className="relative bg-white py-24 md:py-32">
       <div className="container-x">
-        <div className="max-w-[1000px] mx-auto text-center">
-          <p className="text-[11px] uppercase tracking-[0.22em] font-semibold text-[#5a5a6a] mb-5">
-            Client reviews
-          </p>
-          <h2 className="display-text text-[28px] sm:text-[40px] md:text-[52px] lg:text-[60px] font-semibold text-[#08080d] tracking-tight leading-[1.05]">
-            <span className="block whitespace-nowrap">Enterprise-Grade from Day One.</span>
-            <span className="editorial text-[#989898] block whitespace-nowrap">Not After You&apos;ve Outgrown Us.</span>
-          </h2>
-          <p className="mt-6 text-[16px] md:text-[17px] text-[#5a5a6a] max-w-[52ch] mx-auto text-pretty">
-            See how teams are putting Next Layer Intelligence to work — in their own words.
-          </p>
-          <div className="flex items-center justify-center gap-3 mt-6">
-            <div className="flex items-center gap-0.5">
-              {Array.from({ length: 5 }).map((_, i) => (
-                <Star key={i} filled />
-              ))}
+        <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
+          {/* Left: stacked industry cards that crossfade */}
+          <div className="relative w-full max-w-[560px] mx-auto lg:mx-0">
+            <div className="relative grid">
+              {industries.map((industry, idx) => {
+                const isActive = active === idx;
+                return (
+                  <div
+                    key={industry.name}
+                    aria-hidden={!isActive}
+                    className="col-start-1 row-start-1 transition-opacity duration-700 ease-out"
+                    style={{
+                      opacity: isActive ? 1 : 0,
+                      pointerEvents: isActive ? "auto" : "none",
+                    }}
+                  >
+                    <IndustryCard industry={industry} />
+                  </div>
+                );
+              })}
             </div>
-            <span className="text-[14px] font-semibold text-[#08080d]">4.9 average rating</span>
-            <span className="hidden sm:inline text-[13px] text-[#5a5a6a]">·</span>
-            <span className="hidden sm:inline text-[13px] text-[#5a5a6a]">2,000+ reviews</span>
-          </div>
-        </div>
-      </div>
 
-      <div className="relative mt-14 md:mt-20">
-        <button
-          onClick={() => scroll("prev")}
-          className="hidden md:flex absolute left-6 lg:left-10 top-1/2 -translate-y-1/2 z-20 h-12 w-12 rounded-full bg-white shadow-[0_8px_24px_-8px_rgba(8,8,13,0.18),0_2px_4px_-1px_rgba(8,8,13,0.08)] ring-1 ring-black/[0.06] items-center justify-center text-[#08080d] hover:-translate-x-0.5 transition-all"
-          aria-label="Previous review"
-        >
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-            <path d="M10 3L5 8L10 13" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" />
-          </svg>
-        </button>
-
-        <div
-          ref={scrollerRef}
-          className="flex gap-5 md:gap-6 overflow-x-auto hide-scrollbar snap-x snap-mandatory px-5 md:px-[max(2rem,calc((100vw-1800px)/2+2rem))] pb-6 scroll-smooth"
-        >
-          {reviews.map((r) => (
-            <article
-              key={r.name}
-              className="group snap-center flex-shrink-0 w-[88vw] sm:w-[60vw] md:w-[440px] lg:w-[460px] relative rounded-3xl overflow-hidden bg-white ring-1 ring-black/[0.06] shadow-[0_24px_64px_-20px_rgba(20,18,80,0.2),0_4px_12px_-4px_rgba(20,18,80,0.06)] flex flex-col card-hover"
-            >
-              <div className="relative aspect-[16/10] overflow-hidden">
-                <Image
-                  src={r.image}
-                  alt={r.name}
-                  fill
-                  className="object-cover transition-transform duration-700 group-hover:scale-[1.04]"
-                  sizes="(max-width: 768px) 88vw, 480px"
-                />
-                <div
-                  aria-hidden
-                  className="absolute inset-0"
+            <div className="mt-5 flex items-center justify-center gap-2">
+              {industries.map((industry, idx) => (
+                <button
+                  key={industry.name}
+                  onClick={() => setActive(idx)}
+                  aria-label={`Show ${industry.name}`}
+                  className="h-2 rounded-full transition-all duration-500"
                   style={{
+                    width: active === idx ? 28 : 8,
                     background:
-                      "linear-gradient(180deg, rgba(8,8,13,0) 50%, rgba(8,8,13,0.55) 100%)",
+                      active === idx ? "#5b4ef7" : "rgba(8,8,13,0.18)",
                   }}
                 />
+              ))}
+            </div>
+          </div>
 
-                <div className="absolute top-4 left-4 inline-flex items-center gap-1.5 rounded-md bg-white/95 backdrop-blur px-2.5 py-1 ring-1 ring-black/[0.06]">
-                  <span className="text-[10px] uppercase tracking-[0.14em] font-bold text-[#08080d]">{r.company}</span>
-                </div>
-
-                {r.result && (
-                  <div className="absolute top-4 right-4 rounded-xl bg-white/95 backdrop-blur ring-1 ring-black/[0.06] px-3 py-2 text-right shadow-[0_8px_20px_-8px_rgba(8,8,13,0.25)]">
-                    <div className="text-[14px] font-semibold text-[#08080d] leading-none tabular-nums tracking-tight">{r.result.value}</div>
-                    <div className="text-[8.5px] uppercase tracking-wider text-[#5a5a6a] font-semibold mt-1">{r.result.label}</div>
-                  </div>
-                )}
-              </div>
-
-              <div className="p-7 md:p-8 flex flex-col flex-1">
-                <div className="flex items-center gap-0.5 mb-4">
-                  {Array.from({ length: 5 }).map((_, i) => (
-                    <Star key={i} filled={i < r.rating} />
-                  ))}
-                </div>
-
-                <blockquote className="relative text-[16.5px] md:text-[17.5px] leading-[1.5] font-medium text-[#08080d] flex-1">
-                  <span
-                    aria-hidden
-                    className="absolute -top-3 -left-1 text-[44px] leading-none text-[#5b4ef7]/25 select-none"
-                    style={{ fontFamily: "var(--font-instrument-serif), Georgia, serif" }}
-                  >
-                    &ldquo;
-                  </span>
-                  <span className="relative">{r.quote}</span>
-                </blockquote>
-
-                <div className="mt-6 pt-5 border-t border-black/[0.08] flex items-center justify-between">
-                  <div>
-                    <div className="text-[14px] font-semibold text-[#08080d] tracking-tight">{r.name}</div>
-                    <div className="text-[12.5px] text-[#5a5a6a]">
-                      {r.role} · {r.company}
-                    </div>
-                  </div>
-                  <div className="inline-flex items-center gap-1 text-[11px] font-semibold text-[#5b4ef7]">
-                    <svg width="12" height="12" viewBox="0 0 14 14" fill="currentColor">
-                      <path d="M7 0.5L8.94 4.51L13.36 5.15L10.18 8.25L10.93 12.65L7 10.57L3.07 12.65L3.82 8.25L0.64 5.15L5.06 4.51L7 0.5Z" />
-                    </svg>
-                    Verified
-                  </div>
-                </div>
-              </div>
-            </article>
-          ))}
+          {/* Right: text content */}
+          <div>
+            <p className="eyebrow mb-5">Enterprise foundations</p>
+            <h2 className="display-text text-[28px] sm:text-[36px] md:text-[44px] lg:text-[53px] font-semibold text-[#08080d] tracking-tight leading-[1.05]">
+              <span className="block">The Intelligence Layer</span>
+              <span className="editorial text-[#989898] block">for Your Industry.</span>
+            </h2>
+            <p className="mt-8 max-w-[560px] text-[15px] md:text-[16px] leading-[1.6] text-[#4a4a55] text-pretty">
+              We don&apos;t treat security, scale, or governance as future roadmap items. CRM, ERP, cloud infrastructure, data warehouses — the intelligence layer plugs into what you already own, scales from ten automations to ten thousand, and ships with the controls your CISO expects on day one. Your team sees what&apos;s running. Your leadership sees what it&apos;s producing. No black boxes.
+            </p>
+          </div>
         </div>
-
-        <button
-          onClick={() => scroll("next")}
-          className="hidden md:flex absolute right-6 lg:right-10 top-1/2 -translate-y-1/2 z-20 h-12 w-12 rounded-full bg-white shadow-[0_8px_24px_-8px_rgba(8,8,13,0.18),0_2px_4px_-1px_rgba(8,8,13,0.08)] ring-1 ring-black/[0.06] items-center justify-center text-[#08080d] hover:translate-x-0.5 transition-all"
-          aria-label="Next review"
-        >
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-            <path d="M6 3L11 8L6 13" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" />
-          </svg>
-        </button>
-
-        <div
-          aria-hidden
-          className="pointer-events-none absolute inset-y-0 left-0 w-16 md:w-32 bg-gradient-to-r from-white to-transparent"
-        />
-        <div
-          aria-hidden
-          className="pointer-events-none absolute inset-y-0 right-0 w-16 md:w-32 bg-gradient-to-l from-white to-transparent"
-        />
-      </div>
-
-      <div className="container-x mt-10 md:hidden flex items-center justify-center gap-3">
-        <button
-          onClick={() => scroll("prev")}
-          className="h-11 w-11 rounded-full bg-white shadow-card ring-1 ring-black/[0.06] flex items-center justify-center text-[#08080d]"
-          aria-label="Previous review"
-        >
-          <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
-            <path d="M10 3L5 8L10 13" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" />
-          </svg>
-        </button>
-        <button
-          onClick={() => scroll("next")}
-          className="h-11 w-11 rounded-full bg-white shadow-card ring-1 ring-black/[0.06] flex items-center justify-center text-[#08080d]"
-          aria-label="Next review"
-        >
-          <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
-            <path d="M6 3L11 8L6 13" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" />
-          </svg>
-        </button>
       </div>
     </section>
   );
 }
 
-function Star({ filled = false }: { filled?: boolean }) {
+function IndustryCard({ industry }: { industry: Industry }) {
   return (
-    <svg
-      width="16"
-      height="16"
-      viewBox="0 0 14 14"
-      fill={filled ? "#f5b86d" : "none"}
-      stroke={filled ? "#f5b86d" : "#d4d4dc"}
-      strokeWidth="1"
-      aria-hidden="true"
+    <div
+      className="relative w-full rounded-3xl ring-1 ring-white/[0.08] shadow-[0_30px_80px_-20px_rgba(8,8,30,0.55),0_12px_32px_-12px_rgba(91,78,247,0.35)] p-7 md:p-9 overflow-hidden text-white"
+      style={{
+        background:
+          "linear-gradient(180deg, #08080d 0%, #100c2e 55%, #08080d 100%)",
+      }}
     >
-      <path
-        d="M7 0.5L8.94 4.51L13.36 5.15L10.18 8.25L10.93 12.65L7 10.57L3.07 12.65L3.82 8.25L0.64 5.15L5.06 4.51L7 0.5Z"
-        strokeLinejoin="round"
+      <div
+        aria-hidden
+        className="pointer-events-none absolute -top-32 left-1/2 -translate-x-1/2 h-[420px] w-[700px] blur-3xl opacity-60 breathe"
+        style={{
+          background:
+            "radial-gradient(closest-side, rgba(91,78,247,0.5), transparent 70%)",
+        }}
       />
-    </svg>
+
+      <div className="relative flex items-center justify-between gap-3">
+        <div className="text-[24px] md:text-[30px] font-semibold text-white tracking-tight leading-tight text-balance">
+          {industry.name}
+        </div>
+        <span className="inline-flex items-center gap-1.5 rounded-full bg-[#22c55e]/15 ring-1 ring-[#22c55e]/35 text-[#86efac] px-2.5 py-1 text-[10px] uppercase tracking-[0.16em] font-bold shrink-0">
+          <span className="h-1.5 w-1.5 rounded-full bg-[#22c55e] pulse-soft" />
+          Live
+        </span>
+      </div>
+
+      <p className="relative mt-7 text-[19px] md:text-[21px] leading-[1.3] font-semibold text-white tracking-tight text-balance">
+        {industry.headline}
+      </p>
+      <p className="relative mt-4 text-[14px] md:text-[15px] leading-[1.6] text-white/70 text-pretty">
+        {industry.body}
+      </p>
+
+      <div className="relative mt-6 rounded-2xl bg-white/[0.05] ring-1 ring-white/[0.08] p-4">
+        <div className="flex items-center justify-between mb-3">
+          <div className="flex items-center gap-1.5 text-[9.5px] uppercase tracking-[0.18em] font-bold text-white/65">
+            <span className="inline-flex h-3.5 w-3.5 items-center justify-center rounded-full bg-[#5b4ef7]/25 text-[#a5b4ff]">
+              <svg width="8" height="8" viewBox="0 0 12 12" fill="none">
+                <path d="M1.5 6.5L4 4l2.5 2.5L10.5 2" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </span>
+            {industry.signalsHeader}
+          </div>
+          <span className="text-[9.5px] font-mono text-white/40">live · 24/7</span>
+        </div>
+        <ul className="space-y-1.5">
+          {industry.signals.map((s) => (
+            <li
+              key={s.time + s.label}
+              className="flex items-center gap-2.5 text-[11.5px] leading-tight text-white"
+            >
+              <span
+                className="h-1.5 w-1.5 rounded-full shrink-0 pulse-soft"
+                style={{ background: s.dot }}
+              />
+              <span className="font-mono text-[10.5px] text-white/55 tabular-nums">{s.time}</span>
+              <span className="font-semibold tracking-tight">{s.label}</span>
+              <span className="text-white/55 truncate">{s.detail}</span>
+              <span
+                className="ml-auto font-semibold tabular-nums shrink-0 text-[10.5px]"
+                style={{ color: s.deltaColor }}
+              >
+                {s.delta}
+              </span>
+            </li>
+          ))}
+        </ul>
+        <div className="mt-3 pt-3 border-t border-white/[0.08] flex items-end justify-between gap-3">
+          <div>
+            <div className="text-[9.5px] uppercase tracking-[0.18em] font-bold text-white/65">
+              {industry.chartLabel}
+            </div>
+            <div className="mt-1 text-[10.5px] text-white/40">{industry.chartSub}</div>
+          </div>
+          <div className="flex items-end gap-[3px] h-7">
+            {industry.chartBars.map((h, i) => {
+              const peak = industry.chartBars.indexOf(Math.max(...industry.chartBars));
+              return (
+                <span
+                  key={i}
+                  className="w-[5px] rounded-sm"
+                  style={{
+                    height: `${h}%`,
+                    background: i === peak ? "#a5b4ff" : "rgba(165,180,255,0.32)",
+                  }}
+                />
+              );
+            })}
+          </div>
+        </div>
+      </div>
+
+      <div className="relative mt-7 grid grid-cols-3 gap-3 md:gap-4 border-t border-white/[0.1] pt-5">
+        {industry.stats.map((s) => (
+          <div key={s.label}>
+            <div className="text-[32px] md:text-[40px] font-semibold text-white tracking-tight tabular-nums leading-none">
+              {s.value}
+            </div>
+            <div className="mt-2 text-[10.5px] md:text-[11px] leading-[1.4] text-white/60">
+              {s.label}
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <Link
+        href="#"
+        className="reveal-on-hover relative mt-7 inline-flex items-center gap-2 text-[13.5px] font-semibold text-white"
+      >
+        {industry.ctaLabel}
+        <span className="reveal-arrow inline-flex h-7 w-7 items-center justify-center rounded-full bg-[#5b4ef7] text-white">
+          <svg width="11" height="11" viewBox="0 0 12 12" fill="none">
+            <path d="M3 6H9M9 6L6 3M9 6L6 9" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
+        </span>
+      </Link>
+    </div>
   );
 }
