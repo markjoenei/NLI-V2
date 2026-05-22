@@ -50,7 +50,7 @@ export default function Footer() {
       <div className="relative container-x py-16 md:py-24">
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-10 lg:gap-12">
           <div className="col-span-2 sm:col-span-3 lg:col-span-2">
-            <Logo variant="light" />
+            <Logo variant="light" imageClassName="w-[150px] h-auto" />
             <p className="mt-6 text-[14px] text-white/55 max-w-[34ch] leading-relaxed">
               Next Layer Intelligence is the enterprise AI platform powering vertical agents, automation, and predictive intelligence for the world&apos;s most demanding teams.
             </p>

@@ -42,7 +42,7 @@ export default function Skills() {
           <p className="text-[11px] uppercase tracking-[0.22em] font-semibold text-white/55 mb-5">
             Partner ecosystem
           </p>
-          <h2 className="display-text text-[28px] sm:text-[36px] md:text-[44px] lg:text-[53px] font-semibold text-white tracking-tight text-balance">
+          <h2 className="display-text text-[28px] sm:text-[36px] md:text-[44px] lg:text-[60px] font-semibold text-white tracking-tight text-balance">
             The skills, insights, and support to{" "}
             <span className="editorial text-[#989898]">help you scale</span>
           </h2>

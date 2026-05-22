@@ -387,11 +387,11 @@ type V = React.ComponentProps<typeof Placeholder>["variant"];
 
 function GenerativePane() {
   const tiles: { src: string }[] = [
-    { src: "/generated/gen1.jpg" },
-    { src: "/generated/gen2.jpg" },
-    { src: "/generated/gen6.jpg" },
-    { src: "/generated/gen3.jpg" },
-    { src: "/generated/gen4.jpg" },
+    { src: "/generated/il-tile-1.jpg" },
+    { src: "/generated/il-tile-2.jpg" },
+    { src: "/generated/il-tile-3.webp" },
+    { src: "/generated/il-tile-4.jpg" },
+    { src: "/generated/il-tile-5.jpg" },
   ];
   return (
     <div className="grid grid-cols-3 gap-2 md:gap-3">

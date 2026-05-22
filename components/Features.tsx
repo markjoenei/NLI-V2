@@ -11,7 +11,7 @@ export default function Features() {
         <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-8 lg:gap-12 mb-14 md:mb-20">
           <div className="max-w-[900px]">
             <p className="eyebrow mb-5">The &ldquo;Layer&rdquo; Concept</p>
-            <h2 className="display-text text-[28px] sm:text-[36px] md:text-[44px] lg:text-[53px] font-semibold text-[#08080d] tracking-tight leading-[1.05]">
+            <h2 className="display-text text-[28px] sm:text-[36px] md:text-[44px] lg:text-[60px] font-semibold text-[#08080d] tracking-tight leading-[1.05]">
               <span className="block">Your Business Already</span>
               <span className="block">Has the Infrastructure.</span>
               <span className="editorial text-[#989898] block">It&apos;s Missing the Next Layer.</span>

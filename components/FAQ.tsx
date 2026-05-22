@@ -46,7 +46,7 @@ export default function FAQ({
       <div className="relative container-x grid lg:grid-cols-[1fr_1.5fr] gap-12 lg:gap-20">
         <div className="lg:sticky lg:top-28 lg:self-start">
           <h2
-            className={`display-text text-[28px] sm:text-[36px] md:text-[44px] lg:text-[53px] font-semibold tracking-tight leading-[1.05] ${
+            className={`display-text text-[28px] sm:text-[36px] md:text-[44px] lg:text-[60px] font-semibold tracking-tight leading-[1.05] ${
               isDark ? "text-white" : "text-[#08080d]"
             }`}
           >

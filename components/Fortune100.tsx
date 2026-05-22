@@ -173,7 +173,7 @@ export default function Fortune100() {
           {/* Right: text content */}
           <div>
             <p className="eyebrow mb-5">Enterprise foundations</p>
-            <h2 className="display-text text-[28px] sm:text-[36px] md:text-[44px] lg:text-[53px] font-semibold text-[#08080d] tracking-tight leading-[1.05]">
+            <h2 className="display-text text-[28px] sm:text-[36px] md:text-[44px] lg:text-[60px] font-semibold text-[#08080d] tracking-tight leading-[1.05]">
               <span className="block">The Intelligence Layer</span>
               <span className="editorial text-[#989898] block">for Your Industry.</span>
             </h2>

@@ -34,7 +34,7 @@ export default function ReadyToTry() {
               <span className="h-1.5 w-1.5 rounded-full bg-[#5b4ef7]" />
               Vertical AI agents
             </span>
-            <h2 className="display-text-lg text-[28px] sm:text-[36px] md:text-[44px] lg:text-[53px] font-semibold max-w-[18ch] tracking-tight text-balance">
+            <h2 className="display-text-lg text-[28px] sm:text-[36px] md:text-[44px] lg:text-[60px] font-semibold max-w-[18ch] tracking-tight text-balance">
               <span className="block">Your Operation Has a Next Layer.</span>
               <span className="editorial text-[#989898] block">Let&apos;s Build It.</span>
             </h2>

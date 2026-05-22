@@ -119,41 +119,25 @@ export const FAILURE_LIST_BODY = (
     {FAILURE_ITEMS.map((item) => (
       <div
         key={item.label}
-        className="group relative flex flex-col rounded-2xl bg-white/[0.04] ring-1 ring-white/[0.08] hover:ring-white/[0.16] hover:bg-white/[0.06] transition-colors overflow-hidden"
+        className="group relative flex flex-col rounded-2xl bg-[#0e0a24] ring-1 ring-white/[0.06] hover:ring-white/[0.12] shadow-[0_12px_40px_-20px_rgba(8,8,30,0.55)] transition-all overflow-hidden"
       >
-        <div className="relative aspect-[16/10] overflow-hidden">
+        <div className="relative aspect-square overflow-hidden">
           <Image
             src={item.image}
             alt={item.label}
             fill
             className="object-cover transition-transform duration-700 group-hover:scale-[1.04]"
-            style={{ filter: "saturate(0.7)" }}
             sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
           />
-          <div
-            aria-hidden
-            className="absolute inset-0"
-            style={{
-              background:
-                "linear-gradient(180deg, rgba(8,8,13,0.25) 0%, rgba(8,8,13,0.55) 60%, rgba(8,8,13,0.85) 100%)",
-            }}
-          />
-          <div
-            aria-hidden
-            className="absolute inset-0 mix-blend-overlay"
-            style={{
-              background:
-                "linear-gradient(135deg, rgba(255,122,89,0.45) 0%, transparent 55%, rgba(255,122,89,0.18) 100%)",
-            }}
-          />
-          <div className="absolute bottom-3 left-3 right-3">
-            <span className="text-[10px] uppercase tracking-[0.18em] font-bold text-[#ffb59a] bg-black/45 backdrop-blur ring-1 ring-[#ff7a59]/30 rounded px-2 py-1">
+          <div className="absolute top-3 left-3">
+            <span className="inline-flex items-center gap-1.5 text-[10.5px] font-semibold text-white bg-black/55 backdrop-blur ring-1 ring-white/15 rounded-full px-2.5 py-1">
+              <span className="h-1.5 w-1.5 rounded-full bg-[#22c55e] pulse-soft" />
               {item.label}
             </span>
           </div>
         </div>
         <div className="p-6 md:p-7 min-w-0 flex-1">
-          <p className="text-[15.5px] md:text-[16.5px] leading-[1.55] text-white/80 text-pretty">
+          <p className="text-[15.5px] md:text-[16.5px] leading-[1.55] text-white/75 text-pretty">
             {item.text}
           </p>
         </div>
@@ -215,7 +199,7 @@ export default function LovedByUsers({
             {eyebrow}
           </p>
           <h2
-            className={`display-text text-[28px] sm:text-[36px] md:text-[44px] lg:text-[53px] font-semibold text-balance tracking-tight ${
+            className={`display-text text-[28px] sm:text-[36px] md:text-[44px] lg:text-[60px] font-semibold text-balance tracking-tight ${
               isLight ? "text-[#08080d]" : "text-white"
             }`}
           >
@@ -249,14 +233,14 @@ export default function LovedByUsers({
       {showCards && (
         <div className="group/marquee mt-16 md:mt-20 relative overflow-x-clip w-full py-4">
           <div
-            className="flex w-max gap-4 md:gap-5 px-5 md:px-8 items-stretch group-hover/marquee:[animation-play-state:paused]"
+            className="flex w-max gap-6 md:gap-8 px-5 md:px-8 items-stretch group-hover/marquee:[animation-play-state:paused]"
             style={{ animation: "marqueeScroll 40s linear infinite" }}
           >
             {[...cards, ...cards].map((c, idx) => (
               <article
                 key={`${c.title}-${idx}`}
                 aria-hidden={idx >= cards.length}
-                className="group relative rounded-3xl overflow-hidden flex flex-col card-hover w-[300px] md:w-[340px] lg:w-[360px] shrink-0 bg-[#0e0a24] ring-1 ring-white/[0.08] shadow-[0_12px_40px_-20px_rgba(8,8,13,0.45)]"
+                className="group relative rounded-3xl overflow-hidden flex flex-col card-hover w-[380px] md:w-[440px] lg:w-[480px] shrink-0 bg-[#0e0a24] ring-1 ring-white/[0.08] shadow-[0_12px_40px_-20px_rgba(8,8,13,0.45)]"
               >
                 {c.image ? (
                   <div className="relative aspect-[4/3] w-full overflow-hidden bg-[#0a0a14]">
@@ -265,7 +249,7 @@ export default function LovedByUsers({
                       alt={c.title}
                       fill
                       className="object-cover transition-transform duration-700 group-hover:scale-[1.04]"
-                      sizes="360px"
+                      sizes="480px"
                     />
                   </div>
                 ) : (

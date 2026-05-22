@@ -25,10 +25,10 @@ export default function Navbar() {
           : "bg-transparent border-b border-transparent"
       }`}
     >
-      <div className="container-x flex h-20 items-center justify-between">
+      <div className="container-x flex items-center justify-between">
         <div className="flex items-center gap-10">
           <Link href="/" aria-label="Next Layer Intelligence home" className="flex-shrink-0">
-            <Logo />
+            <Logo imageClassName="w-[74px] h-auto" />
           </Link>
           <nav className="hidden lg:flex items-center gap-0.5">
             {navItems.map((item) => (
