@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
@@ -203,6 +204,19 @@ function IndustryCard({ industry }: { industry: Industry }) {
             "radial-gradient(closest-side, rgba(91,78,247,0.5), transparent 70%)",
         }}
       />
+
+      <div
+        aria-hidden
+        className="pointer-events-none absolute -right-20 -top-10 h-[520px] w-[520px] opacity-[0.18] mix-blend-screen"
+      >
+        <Image
+          src="/generated/industry-card-bg.png"
+          alt=""
+          fill
+          className="object-contain object-right"
+          sizes="520px"
+        />
+      </div>
 
       <div className="relative flex items-center justify-between gap-3">
         <div className="text-[24px] md:text-[30px] font-semibold text-white tracking-tight leading-tight text-balance">

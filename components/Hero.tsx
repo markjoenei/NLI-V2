@@ -2,23 +2,13 @@ import DashboardMockup from "./DashboardMockup";
 
 export default function Hero() {
   return (
-    <section className="relative w-full overflow-hidden grain text-white">
-      <video
-        className="absolute inset-0 h-full w-full object-cover -z-10"
-        src="/hero-bg.mp4"
-        autoPlay
-        loop
-        muted
-        playsInline
-        preload="auto"
-        aria-hidden="true"
-      />
+    <section className="relative w-full overflow-hidden grain text-white bg-[#08080e]">
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0 -z-10"
         style={{
           background:
-            "linear-gradient(180deg, rgba(8,8,16,0.45) 0%, rgba(8,8,16,0.55) 55%, rgba(8,8,16,0.85) 100%)",
+            "linear-gradient(180deg, #0a0a18 0%, #0e0c24 55%, #07070f 100%)",
         }}
       />
       <div

@@ -92,7 +92,17 @@ function FeatureBig({
     <article
       className={`group relative overflow-hidden rounded-3xl bg-gradient-to-br from-[#f7f6fa] to-[#eeeef5] ring-1 ring-black/[0.04] card-hover ${className}`}
     >
-      <div className="grid md:grid-cols-[1.05fr_1fr] items-stretch">
+      <div className="grid md:grid-cols-[1fr_1.05fr] items-stretch">
+        <div className="relative aspect-[4/3] md:aspect-auto md:min-h-[460px] overflow-hidden bg-[#0a0a14]">
+          <Image
+            src="/generated/intelligence-layer.png"
+            alt="Intelligence Layer — predicts, decides, executes"
+            fill
+            className="object-cover"
+            sizes="(max-width: 768px) 100vw, 50vw"
+            priority
+          />
+        </div>
         <div className="relative p-7 md:p-12 lg:p-14 flex flex-col justify-center">
           <Badge>{badge}</Badge>
           <h3 className="mt-4 text-[34px] md:text-[44px] lg:text-[52px] font-semibold text-[#08080d] max-w-[18ch] tracking-tight leading-[1.05]">
@@ -100,163 +110,6 @@ function FeatureBig({
           </h3>
           <p className="mt-5 text-[18px] md:text-[20px] lg:text-[22px] text-[#3a3a4a] max-w-[42ch] leading-relaxed">{body}</p>
           {features && features.length > 0 && <FeaturesList items={features} />}
-        </div>
-        <div className="relative aspect-[4/3] md:aspect-auto md:min-h-[460px] overflow-hidden bg-gradient-to-br from-[#0a0a14] via-[#13132a] to-[#1a1530]">
-          {/* Ambient glows */}
-          <div
-            aria-hidden
-            className="absolute -top-20 -right-20 h-[360px] w-[360px] rounded-full opacity-60 blur-3xl"
-            style={{ background: "radial-gradient(closest-side, rgba(91,78,247,0.55), transparent 70%)" }}
-          />
-          <div
-            aria-hidden
-            className="absolute -bottom-24 -left-20 h-[320px] w-[320px] rounded-full opacity-50 blur-3xl"
-            style={{ background: "radial-gradient(closest-side, rgba(255,167,140,0.45), transparent 70%)" }}
-          />
-
-          {/* Grid overlay */}
-          <div
-            aria-hidden
-            className="absolute inset-0 opacity-[0.08]"
-            style={{
-              backgroundImage:
-                "linear-gradient(rgba(255,255,255,0.6) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.6) 1px, transparent 1px)",
-              backgroundSize: "32px 32px",
-            }}
-          />
-
-          {/* Predict → Decide → Execute pipeline card */}
-          <div className="absolute top-8 left-1/2 -translate-x-1/2 w-[92%] max-w-[460px] rounded-2xl bg-white/[0.07] backdrop-blur-md ring-1 ring-white/12 shadow-[0_24px_60px_-20px_rgba(0,0,0,0.65)] p-5 md:p-6 float-slow">
-            <div className="flex items-center justify-between mb-4">
-              <span className="text-[11px] font-bold text-white/80 uppercase tracking-[0.16em]">Intelligence Layer</span>
-              <span className="inline-flex items-center gap-1.5 rounded-full bg-[#22c55e]/15 ring-1 ring-[#22c55e]/30 px-2 py-0.5 text-[10px] font-semibold text-[#86efac]">
-                <span className="relative h-1.5 w-1.5">
-                  <span className="absolute inset-0 rounded-full bg-[#22c55e] pulse-soft" />
-                  <span className="relative h-1.5 w-1.5 rounded-full bg-[#22c55e]" />
-                </span>
-                Live
-              </span>
-            </div>
-            <div className="relative grid grid-cols-3 gap-3">
-              <div
-                aria-hidden
-                className="absolute left-4 right-4 top-[22px] h-px"
-                style={{
-                  background:
-                    "linear-gradient(90deg, #6f63ff 0%, #9d8cff 50%, #ffa78c 100%)",
-                }}
-              />
-              {[
-                { label: "Predict", color: "#6f63ff" },
-                { label: "Decide", color: "#9d8cff" },
-                { label: "Execute", color: "#ffa78c" },
-              ].map((step) => (
-                <div key={step.label} className="relative rounded-xl bg-white/[0.06] ring-1 ring-white/12 px-3 py-3">
-                  <span
-                    className="relative z-10 mb-2 flex h-10 items-center justify-center rounded-lg w-full"
-                    style={{
-                      background: `linear-gradient(140deg, ${step.color}33 0%, ${step.color}10 100%)`,
-                      boxShadow: `inset 0 0 0 1px ${step.color}40`,
-                    }}
-                  >
-                    <span
-                      className="h-2 w-2 rounded-full"
-                      style={{
-                        background: step.color,
-                        boxShadow: `0 0 12px ${step.color}`,
-                      }}
-                    />
-                  </span>
-                  <span className="block text-[13px] font-semibold text-white tracking-tight">
-                    {step.label}
-                  </span>
-                </div>
-              ))}
-            </div>
-            <div className="mt-4 flex items-center justify-between text-[10.5px] font-semibold text-white/60">
-              <span>End-to-end · &lt;1s</span>
-              <span className="text-[#86efac]">12,840 cycles / day</span>
-            </div>
-          </div>
-
-          {/* Signal / prediction card */}
-          <div className="absolute top-1/2 -translate-y-1/2 left-6 w-[260px] md:w-[290px] rounded-2xl bg-white/95 backdrop-blur-md ring-1 ring-black/[0.06] shadow-[0_18px_44px_-14px_rgba(8,8,13,0.5)] p-4 md:p-5 float-medium">
-            <div className="flex items-center gap-2.5 mb-3">
-              <span
-                className="inline-flex h-8 w-8 items-center justify-center rounded-lg text-white shrink-0"
-                style={{ background: "linear-gradient(135deg, #6f63ff 0%, #5b4ef7 100%)" }}
-              >
-                <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
-                  <path d="M1.5 12L5 8L8 11L14.5 4" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" />
-                  <circle cx="14.5" cy="4" r="1.6" fill="currentColor" />
-                </svg>
-              </span>
-              <div className="min-w-0">
-                <div className="text-[10px] font-bold text-[#5b4ef7] uppercase tracking-[0.16em] leading-none">Prediction</div>
-                <div className="text-[10.5px] text-black/45 mt-1 leading-none">SKU-2841 · 6h horizon</div>
-              </div>
-            </div>
-            <p className="text-[13px] md:text-[13.5px] font-medium text-[#08080d] leading-snug">
-              Demand spike incoming. Reroute fulfillment from East to Central.
-            </p>
-            <div className="mt-3 pt-3 border-t border-black/[0.06] flex items-center justify-between text-[11px]">
-              <span className="text-black/55">Confidence</span>
-              <div className="flex items-center gap-2">
-                <span className="relative h-1.5 w-16 rounded-full bg-black/[0.08] overflow-hidden">
-                  <span className="absolute inset-y-0 left-0 w-[96%] rounded-full bg-gradient-to-r from-[#6f63ff] to-[#22c55e]" />
-                </span>
-                <span className="font-semibold tabular-nums text-[#08080d]">96.4%</span>
-              </div>
-            </div>
-          </div>
-
-          {/* Decision / action card */}
-          <div className="absolute bottom-8 right-6 w-[260px] md:w-[290px] rounded-2xl bg-white/95 backdrop-blur-md ring-1 ring-black/[0.06] shadow-[0_18px_44px_-14px_rgba(8,8,13,0.5)] p-4 md:p-5 float-fast">
-            <div className="flex items-center gap-2.5 mb-3">
-              <span
-                className="inline-flex h-8 w-8 items-center justify-center rounded-lg text-white shrink-0"
-                style={{ background: "linear-gradient(135deg, #34d399 0%, #15803d 100%)" }}
-              >
-                <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
-                  <path d="M4 8L7 11L12 5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
-              </span>
-              <div className="flex-1 min-w-0">
-                <div className="text-[10px] font-bold text-[#15803d] uppercase tracking-[0.16em] leading-none">Action executed</div>
-                <div className="text-[10.5px] text-black/45 mt-1 leading-none">0.42s · no human in loop</div>
-              </div>
-            </div>
-            <p className="text-[13px] md:text-[13.5px] font-medium text-[#08080d] leading-snug">
-              Inventory rebalanced across <span className="font-semibold">3 hubs</span>.
-            </p>
-            <div className="mt-3 pt-3 border-t border-black/[0.06] grid grid-cols-3 gap-2 text-center">
-              <div>
-                <div className="text-[15px] font-semibold text-[#08080d] tabular-nums leading-none">3</div>
-                <div className="mt-1 text-[9px] uppercase tracking-wider text-black/45 font-semibold">hubs</div>
-              </div>
-              <div>
-                <div className="text-[15px] font-semibold text-[#08080d] tabular-nums leading-none">2,840</div>
-                <div className="mt-1 text-[9px] uppercase tracking-wider text-black/45 font-semibold">units</div>
-              </div>
-              <div>
-                <div className="text-[15px] font-semibold text-[#15803d] tabular-nums leading-none">+18%</div>
-                <div className="mt-1 text-[9px] uppercase tracking-wider text-black/45 font-semibold">margin</div>
-              </div>
-            </div>
-          </div>
-
-          {/* Autonomy tag */}
-          <div className="hidden lg:inline-flex absolute bottom-8 left-6 items-center gap-2.5 rounded-xl bg-white/[0.08] backdrop-blur-md ring-1 ring-white/15 px-3 py-2 float-slow">
-            <span className="inline-flex h-7 w-7 items-center justify-center rounded-md bg-[#5b4ef7]/25 text-[#c9c0ff]">
-              <svg width="13" height="13" viewBox="0 0 10 10" fill="currentColor">
-                <path d="M5 0.5L6.4 3.3L9.5 3.8L7.3 6L7.8 9L5 7.6L2.2 9L2.7 6L0.5 3.8L3.6 3.3L5 0.5Z" />
-              </svg>
-            </span>
-            <div className="leading-none">
-              <div className="text-[12px] font-semibold text-white">Autonomous</div>
-              <div className="text-[9.5px] text-white/55 mt-1">closed-loop · 24/7</div>
-            </div>
-          </div>
         </div>
       </div>
     </article>
@@ -322,187 +175,27 @@ function FeatureWide({
           "linear-gradient(135deg, #ebecff 0%, #eee9ff 50%, #f6f3ff 100%)",
       }}
     >
-      <div className="grid md:grid-cols-[1fr_1.25fr] items-stretch">
+      <div className="grid md:grid-cols-[1.25fr_1fr] items-stretch">
+        <div className="relative aspect-[4/3] md:aspect-auto md:min-h-[480px] overflow-hidden bg-[#0a0a14]">
+          <Image
+            src="/generated/people-layer.avif"
+            alt="People Layer — your team, freed to do real work"
+            fill
+            className="object-cover"
+            sizes="(max-width: 768px) 100vw, 55vw"
+          />
+        </div>
         <div className="relative p-7 md:p-10 lg:p-12 flex flex-col justify-center">
           <Badge>{badge}</Badge>
           <h3 className="mt-4 text-[34px] md:text-[44px] lg:text-[52px] font-semibold text-[#08080d] max-w-[20ch] tracking-tight leading-[1.05]">{title}</h3>
           <p className="mt-5 text-[18px] md:text-[20px] lg:text-[22px] text-[#3a3a4a] max-w-[42ch] leading-relaxed">{body}</p>
           {features && features.length > 0 && <FeaturesList items={features} />}
         </div>
-        <AnalyticsDashboardPanel />
       </div>
     </article>
   );
 }
 
-function AnalyticsDashboardPanel() {
-  return (
-    <div className="relative flex items-center justify-center px-6 md:px-8 lg:px-10 py-10 md:py-14 md:min-h-[480px] overflow-hidden">
-      <div
-        aria-hidden
-        className="absolute inset-0"
-        style={{
-          background:
-            "linear-gradient(140deg, #1a1740 0%, #0d0a2a 55%, #14102d 100%)",
-        }}
-      />
-      <div
-        aria-hidden
-        className="absolute inset-0"
-        style={{
-          background:
-            "radial-gradient(55% 45% at 55% 50%, rgba(91,78,247,0.32), transparent 70%)",
-        }}
-      />
-      <div
-        aria-hidden
-        className="absolute inset-0 opacity-60"
-        style={{
-          backgroundImage:
-            "radial-gradient(circle, rgba(255,255,255,0.08) 0.6px, transparent 1px)",
-          backgroundSize: "14px 14px",
-        }}
-      />
-      <div aria-hidden className="absolute top-[18%] left-[12%] h-8 w-8 rounded-full bg-white/15 blur-xl" />
-      <div aria-hidden className="absolute bottom-[20%] right-[14%] h-12 w-12 rounded-full bg-[#5b4ef7]/40 blur-2xl" />
-      <div aria-hidden className="absolute top-[30%] right-[20%] h-5 w-5 rounded-full bg-[#ff9d80]/40 blur-lg" />
-
-      <div className="relative w-full max-w-[460px]">
-        {/* Laptop top — bezel + screen */}
-        <div
-          className="relative rounded-t-xl bg-[#1a1a2e] ring-1 ring-white/[0.12] px-2.5 pt-2 pb-1"
-          style={{
-            boxShadow:
-              "0 30px 80px -20px rgba(0,0,0,0.7), inset 0 1px 0 rgba(255,255,255,0.06)",
-          }}
-        >
-          <div className="h-2.5 flex items-center justify-center mb-1">
-            <span className="h-[3px] w-[3px] rounded-full bg-white/25" />
-          </div>
-          <div className="rounded-md bg-white overflow-hidden ring-1 ring-black/[0.06]">
-            {/* App chrome */}
-            <div className="h-5 bg-[#fafafb] border-b border-black/[0.05] flex items-center px-2 gap-1">
-              <span className="h-1.5 w-1.5 rounded-full bg-[#ff5f57]" />
-              <span className="h-1.5 w-1.5 rounded-full bg-[#febc2e]" />
-              <span className="h-1.5 w-1.5 rounded-full bg-[#28c840]" />
-              <div className="ml-auto mr-auto h-3 px-2 rounded bg-white ring-1 ring-black/[0.05] text-[8px] text-black/35 inline-flex items-center">
-                app.nextlayer.ai/analytics
-              </div>
-            </div>
-
-            {/* Dashboard */}
-            <div className="p-3">
-              <div className="flex items-center justify-between mb-2">
-                <div>
-                  <div className="text-[8px] uppercase tracking-[0.16em] text-black/45 font-semibold">Revenue forecast</div>
-                  <div className="flex items-baseline gap-1.5 mt-0.5">
-                    <div className="text-[16px] font-semibold text-[#08080d] tracking-tight tabular-nums">$1.24M</div>
-                    <div className="text-[9px] font-semibold text-[#15803d]">+18.4%</div>
-                  </div>
-                </div>
-                <div className="flex gap-0.5">
-                  {["7d", "30d", "90d"].map((p, i) => (
-                    <span
-                      key={p}
-                      className={`px-1.5 py-0.5 rounded text-[8.5px] font-semibold ${
-                        i === 1 ? "bg-[#08080d] text-white" : "text-black/40"
-                      }`}
-                    >
-                      {p}
-                    </span>
-                  ))}
-                </div>
-              </div>
-
-              <svg viewBox="0 0 320 90" className="w-full h-16" preserveAspectRatio="none">
-                <defs>
-                  <linearGradient id="feat-chart-laptop" x1="0" x2="0" y1="0" y2="1">
-                    <stop offset="0%" stopColor="#5b4ef7" stopOpacity="0.32" />
-                    <stop offset="100%" stopColor="#5b4ef7" stopOpacity="0" />
-                  </linearGradient>
-                </defs>
-                <path d="M0 62 C 30 58, 50 70, 80 50 C 110 32, 140 42, 180 24 L 180 90 L 0 90 Z" fill="url(#feat-chart-laptop)" />
-                <path d="M0 62 C 30 58, 50 70, 80 50 C 110 32, 140 42, 180 24" stroke="#5b4ef7" strokeWidth="1.8" fill="none" strokeLinecap="round" />
-                <path d="M180 24 C 210 16, 240 28, 270 10 C 290 4, 305 6, 320 2" stroke="#5b4ef7" strokeWidth="1.8" fill="none" strokeDasharray="2.5 2.5" opacity="0.55" strokeLinecap="round" />
-                <circle cx="180" cy="24" r="3" fill="#5b4ef7" />
-                <circle cx="180" cy="24" r="6" fill="#5b4ef7" opacity="0.2" />
-                <line x1="180" y1="0" x2="180" y2="90" stroke="rgba(8,8,13,0.08)" strokeDasharray="2 3" />
-              </svg>
-
-              <div className="grid grid-cols-3 gap-1.5 mt-2">
-                {[
-                  { l: "Active", v: "24,580", t: "+8%" },
-                  { l: "Conv.", v: "24.6%", t: "+2.1%" },
-                  { l: "Churn", v: "3.2%", t: "−0.8%" },
-                ].map((s) => (
-                  <div key={s.l} className="rounded bg-[#f7f7fa] ring-1 ring-black/[0.04] px-2 py-1.5">
-                    <div className="text-[7.5px] uppercase tracking-wider text-black/45 font-semibold">{s.l}</div>
-                    <div className="text-[10.5px] font-semibold text-[#08080d] tabular-nums mt-0.5">{s.v}</div>
-                    <div className="text-[7.5px] font-semibold text-[#15803d] mt-0.5">{s.t}</div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Laptop base */}
-        <div className="relative">
-          <div
-            className="h-3 mx-[-18px] rounded-b-2xl"
-            style={{
-              background: "linear-gradient(180deg, #1a1a2e 0%, #0f0f1c 100%)",
-              boxShadow:
-                "0 4px 14px rgba(0,0,0,0.45), inset 0 1px 0 rgba(255,255,255,0.06)",
-            }}
-          />
-          <div className="absolute left-1/2 -translate-x-1/2 top-0 h-[3px] w-20 bg-[#0a0a14] rounded-b-md" />
-        </div>
-
-        {/* Soft floor reflection */}
-        <div
-          aria-hidden
-          className="mx-auto mt-2 h-3 w-[70%] rounded-full blur-md opacity-50"
-          style={{ background: "rgba(0,0,0,0.6)" }}
-        />
-
-        {/* Floating accent: AI prediction */}
-        <div className="hidden md:flex absolute -bottom-2 -right-4 lg:-right-10 items-center gap-3 rounded-2xl bg-white/95 backdrop-blur-md ring-1 ring-black/[0.05] shadow-[0_12px_32px_-12px_rgba(91,78,247,0.55)] px-4 py-3 float-slow">
-          <span className="inline-flex h-9 w-9 items-center justify-center rounded-xl bg-[#eeebff] text-[#5b4ef7]">
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-              <path d="M9 2L4 9H8L7 14L12 7H8L9 2Z" fill="currentColor" />
-            </svg>
-          </span>
-          <div>
-            <div className="text-[9px] uppercase tracking-wider text-black/45 font-semibold">AI prediction</div>
-            <div className="text-[13.5px] font-semibold text-[#08080d] tabular-nums">+$340K · Q4</div>
-          </div>
-        </div>
-
-        {/* Floating accent: model accuracy */}
-        <div className="hidden md:flex absolute -top-4 -left-4 items-center gap-2.5 rounded-xl bg-white/95 backdrop-blur-md ring-1 ring-black/[0.05] shadow-[0_8px_24px_-8px_rgba(8,8,13,0.3)] px-3 py-2 float-fast">
-          <svg width="44" height="20" viewBox="0 0 44 20" fill="none">
-            <path d="M0 16 L 8 12 L 16 14 L 24 8 L 32 5 L 44 2" stroke="#15803d" strokeWidth="1.6" fill="none" strokeLinecap="round" strokeLinejoin="round" />
-            <circle cx="44" cy="2" r="1.6" fill="#15803d" />
-          </svg>
-          <div>
-            <div className="text-[8.5px] uppercase tracking-wider text-black/45 font-semibold leading-tight">Model accuracy</div>
-            <div className="text-[11.5px] font-semibold text-[#08080d] leading-tight mt-0.5">99.4%</div>
-          </div>
-        </div>
-
-        {/* Floating live data pill */}
-        <div className="hidden lg:flex absolute top-1/2 -translate-y-1/2 -right-14 items-center gap-2 rounded-lg bg-white/95 backdrop-blur-md ring-1 ring-black/[0.05] shadow-[0_8px_24px_-8px_rgba(8,8,13,0.25)] px-2.5 py-1.5 float-medium">
-          <span className="relative h-1.5 w-1.5">
-            <span className="absolute inset-0 rounded-full bg-[#22c55e] pulse-soft" />
-            <span className="relative h-1.5 w-1.5 rounded-full bg-[#22c55e]" />
-          </span>
-          <span className="text-[10px] font-semibold text-[#08080d]">Live data</span>
-        </div>
-      </div>
-    </div>
-  );
-}
 
 type SmallProps = CardBase & {
   tone?: "light" | "purple" | "image" | "palette" | "systems" | "photo";
