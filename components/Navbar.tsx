@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import Logo from "./Logo";
 
-const navItems = ["Solutions", "Industries", "Insights", "Company"];
+const navItems = ["Services", "How It Works", "Case Studies", "About", "Insights"];
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
@@ -25,10 +25,36 @@ export default function Navbar() {
           : "bg-transparent border-b border-transparent"
       }`}
     >
-      <div className="container-x flex items-center justify-between">
+      <div className="container-x flex items-center justify-between py-[10px] lg:py-0">
         <div className="flex items-center gap-10">
           <Link href="/" aria-label="Next Layer Intelligence home" className="flex-shrink-0">
-            <Logo imageClassName="w-[74px] h-auto" />
+            {/* Mobile: icon left + text right */}
+            <span className="flex lg:hidden items-center gap-2">
+              <svg
+                width="30"
+                height="26"
+                viewBox="0 0 40 36"
+                fill="none"
+                aria-hidden="true"
+                className="shrink-0"
+              >
+                <g strokeLinecap="round" strokeLinejoin="round" fill="none">
+                  <path d="M4 6 L20 11.5 L36 6" stroke="#bcbcbc" strokeWidth="1.7" />
+                  <path d="M4 12 L20 17.5 L36 12" stroke="#8e8e8e" strokeWidth="1.7" />
+                  <path d="M4 18 L20 23.5 L36 18" stroke="#5a5a5a" strokeWidth="1.7" />
+                  <path d="M4 24 L20 29.5 L36 24" stroke="#08080d" strokeWidth="2.1" />
+                </g>
+              </svg>
+              <span className="flex flex-col leading-[1.05] text-[#08080d]">
+                <span className="font-bold text-[15px] tracking-tight">Next Layer</span>
+                <span className="font-medium text-[12px] text-[#3a3a4a]">Intelligence</span>
+              </span>
+            </span>
+
+            {/* Desktop: stacked logo image */}
+            <span className="hidden lg:inline-flex">
+              <Logo imageClassName="w-[74px] h-auto" />
+            </span>
           </Link>
           <nav className="hidden lg:flex items-center gap-0.5">
             {navItems.map((item) => (

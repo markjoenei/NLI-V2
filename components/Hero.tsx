@@ -35,6 +35,10 @@ export default function Hero() {
             "radial-gradient(closest-side, rgba(157,140,255,0.55), transparent 70%)",
         }}
       />
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 bg-black/40"
+      />
 
       <div className="relative container-x pt-20 md:pt-28 pb-8 md:pb-12 text-center">
         <h1 className="display-text mx-auto max-w-[22ch] text-[30px] sm:text-[42px] md:text-[56px] lg:text-[68px] font-semibold text-white text-balance drop-shadow-[0_8px_32px_rgba(0,0,0,0.45)]">
@@ -50,7 +54,7 @@ export default function Hero() {
         </p>
       </div>
 
-      <div className="relative container-x pb-16 md:pb-20">
+      <div className="relative container-x">
         <div
           aria-hidden
           className="pointer-events-none absolute inset-x-0 -top-10 bottom-0 mx-auto max-w-[1200px] blur-3xl opacity-60"
@@ -69,13 +73,15 @@ export default function Hero() {
 
 function TrustLogosMarquee() {
   const items: BrandKind[] = [
-    "meta",
-    "kelloggs",
-    "cisco",
-    "seagate",
-    "nationwide",
-    "hbo",
+    "stc",
+    "oracle",
+    "dell",
+    "rbc",
+    "lgcns",
   ];
+  // Repeat the brands enough times that each half of the loop spans
+  // wider than the largest viewport — guarantees a seamless, gap-free scroll.
+  const oneTrack = [...items, ...items, ...items, ...items];
   return (
     <div className="relative bg-white">
       <div className="relative overflow-hidden py-7 md:py-9">
@@ -91,11 +97,11 @@ function TrustLogosMarquee() {
         />
         <div
           className="flex w-max items-center will-change-transform"
-          style={{ animation: "marqueeScroll 32s linear infinite" }}
+          style={{ animation: "marqueeScroll 40s linear infinite" }}
         >
           {[0, 1].map((dup) =>
-            items.map((kind) => (
-              <BrandLogo key={`${dup}-${kind}`} kind={kind} />
+            oneTrack.map((kind, i) => (
+              <BrandLogo key={`${dup}-${i}-${kind}`} kind={kind} />
             ))
           )}
         </div>
@@ -104,90 +110,87 @@ function TrustLogosMarquee() {
   );
 }
 
-type BrandKind = "meta" | "kelloggs" | "cisco" | "seagate" | "nationwide" | "hbo";
+type BrandKind = "stc" | "oracle" | "dell" | "rbc" | "lgcns";
 
 function BrandLogo({ kind }: { kind: BrandKind }) {
   const wrap = "inline-flex items-center justify-center gap-2 px-10 md:px-14 h-14 shrink-0";
 
   switch (kind) {
-    case "meta":
-      return (
-        <span className={wrap}>
-          <svg width="32" height="20" viewBox="0 0 60 38" fill="none" aria-label="Meta">
-            <defs>
-              <linearGradient id="meta-grad" x1="0" x2="1" y1="0" y2="1">
-                <stop offset="0%" stopColor="#0081fb" />
-                <stop offset="100%" stopColor="#0064e0" />
-              </linearGradient>
-            </defs>
-            <path
-              d="M9 9c-3 0-5 3-5 10 0 6 2 10 5 10 3 0 5-2 8-7l4-7c-4-4-7-6-12-6Zm0 4c2 0 3 1 6 5l-4 6c-2 4-3 5-4 5-1 0-2-2-2-6 0-7 1-10 4-10Zm32-4c-5 0-8 2-12 6l-4 7c3 5 5 7 8 7 3 0 5-4 5-10 0-7-2-10 3-10Zm0 4c3 0 4 3 4 10 0 4-1 6-2 6-1 0-2-1-4-5l-4-6c3-4 4-5 6-5Z"
-              fill="url(#meta-grad)"
-            />
-          </svg>
-          <span className="text-[24px] leading-none font-medium tracking-[-0.02em] text-[#1c1e21]">Meta</span>
-        </span>
-      );
-    case "kelloggs":
+    case "stc":
       return (
         <span className={wrap}>
           <span
-            className="text-[26px] leading-none font-bold italic tracking-[-0.015em] text-[#e8252e]"
+            className="text-[30px] leading-none font-bold tracking-[-0.04em] text-[#4a4a52] lowercase"
             style={{ fontFamily: "Georgia, 'Times New Roman', serif" }}
           >
-            Kellogg&apos;s
+            stc
           </span>
         </span>
       );
-    case "cisco":
+    case "oracle":
       return (
         <span className={wrap}>
-          <span className="inline-flex flex-col items-center gap-[5px] text-[#1c1e21]">
-            <span className="inline-flex items-end gap-[2px] h-[14px]">
-              {[6, 10, 14, 10, 6, 10, 14, 10, 6].map((h, i) => (
-                <span
-                  key={i}
-                  className="w-[2px] bg-current rounded-[1px]"
-                  style={{ height: `${h}px` }}
-                />
-              ))}
-            </span>
-            <span className="text-[15px] leading-none font-bold tracking-[0.04em]">CISCO</span>
+          <span
+            className="text-[22px] leading-none font-extrabold tracking-[0.06em] text-[#c74634]"
+            style={{ fontFamily: "Arial, Helvetica, sans-serif" }}
+          >
+            ORACLE
           </span>
         </span>
       );
-    case "seagate":
+    case "dell":
       return (
         <span className={wrap}>
-          <svg width="20" height="20" viewBox="0 0 28 28" fill="none" aria-label="Seagate">
+          <span className="inline-flex flex-col items-center leading-none gap-1">
+            <span className="text-[24px] font-extrabold tracking-[-0.02em] text-[#08080d]">DELL</span>
+            <span className="text-[8px] font-medium text-[#3a3a4a] tracking-[0.05em]">Technologies</span>
+          </span>
+        </span>
+      );
+    case "rbc":
+      return (
+        <span className={wrap}>
+          <svg width="30" height="36" viewBox="0 0 30 36" fill="none" aria-label="RBC">
             <path
-              d="M20 8.5c-1-1.8-3-2.8-6-2.8-3 0-6 2-6 5 0 6 12 4 12 10 0 3-3 5-7 5-3 0-6-1-7-4"
-              stroke="#5fb47a"
-              strokeWidth="2.8"
+              d="M3 4 L27 4 L27 21 C27 28 15 33 15 33 C15 33 3 28 3 21 L3 4 Z"
+              fill="#08080d"
+            />
+            <path
+              d="M9 10 C9 9, 10 8, 11 8 L19 8 C20 8, 21 9, 21 10 L21 13 C21 14, 20 15, 19 15 L15 15 L15 20 L19 20 C20 20, 21 21, 21 22 L21 24"
+              stroke="#ffffff"
+              strokeWidth="1.6"
               strokeLinecap="round"
+              strokeLinejoin="round"
               fill="none"
             />
+            <circle cx="11" cy="22" r="1.4" fill="#ffd24a" />
           </svg>
-          <span className="text-[15px] leading-none font-semibold tracking-[0.2em] text-[#4a5560]">SEAGATE</span>
         </span>
       );
-    case "nationwide":
+    case "lgcns":
       return (
         <span className={wrap}>
-          <svg width="26" height="22" viewBox="0 0 32 26" fill="none" aria-label="Nationwide">
-            <path
-              d="M3 4.5C3 3 4 2 5.5 2c2 0 3 1 5 3.5l4 5V4.5C14.5 3 16 2 17 2c1 0 2 0.5 2 2v14.5C19 21 17.5 22 16 22c-1.5 0-3-1-5-3.5l-4-5V19.5C7 21 5.5 22 4.5 22 3.5 22 3 21.5 3 19.5V4.5Z"
-              fill="#e21f26"
-            />
-            <circle cx="6" cy="6" r="1.2" fill="#ffffff" />
-          </svg>
-          <span className="text-[20px] leading-none font-bold tracking-[-0.025em] text-[#0033a0] lowercase">nationwide</span>
-        </span>
-      );
-    case "hbo":
-      return (
-        <span className={wrap}>
-          <span className="text-[28px] leading-none font-black tracking-[-0.03em] text-[#0a0a14]">HBO</span>
+          <span
+            className="inline-flex h-7 w-7 items-center justify-center rounded-full"
+            style={{ background: "#a50034" }}
+            aria-label="LG"
+          >
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+              <circle cx="12" cy="12" r="10" stroke="#ffffff" strokeWidth="1.2" fill="none" />
+              <circle cx="15.5" cy="9.5" r="0.9" fill="#ffffff" />
+              <path
+                d="M6.5 5 L6.5 16 L13 16"
+                stroke="#ffffff"
+                strokeWidth="1.2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                fill="none"
+              />
+            </svg>
+          </span>
+          <span className="ml-1 text-[18px] leading-none font-bold tracking-[-0.01em] text-[#08080d]">
+            LG CNS
+          </span>
         </span>
       );
   }

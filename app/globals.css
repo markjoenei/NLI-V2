@@ -89,6 +89,12 @@ h1, h2, h3 {
   0%, 100% { opacity: 0.55; transform: scale(1); }
   50% { opacity: 0.9; transform: scale(1.06); }
 }
+@keyframes zoomOutIn {
+  0%   { opacity: 0; transform: scale(1.18); filter: blur(6px); }
+  60%  { opacity: 1; filter: blur(0); }
+  100% { opacity: 1; transform: scale(1); filter: blur(0); }
+}
+
 @keyframes flow-line {
   to { stroke-dashoffset: -20; }
 }
@@ -292,6 +298,12 @@ h1, h2, h3 {
     animation: pulseSoft 2.6s ease-in-out infinite;
   }
 
+  .zoom-out-in {
+    animation: zoomOutIn 1.1s cubic-bezier(0.22, 1, 0.36, 1) both;
+    transform-origin: 50% 40%;
+    will-change: opacity, transform, filter;
+  }
+
   .shine {
     position: relative;
     overflow: hidden;
@@ -341,7 +353,7 @@ h1, h2, h3 {
       transition: none;
     }
     .float-slow, .float-medium, .float-fast,
-    .pulse-soft, .marquee {
+    .pulse-soft, .marquee, .zoom-out-in {
       animation: none;
     }
   }

@@ -3,6 +3,7 @@ import Hero from "@/components/Hero";
 import Fortune100 from "@/components/Fortune100";
 import Features from "@/components/Features";
 import LovedByUsers, { FAILURE_LIST_BODY } from "@/components/LovedByUsers";
+import IntelligenceStack from "@/components/IntelligenceStack";
 import Skills from "@/components/Skills";
 import FAQ from "@/components/FAQ";
 import ReadyToTry from "@/components/ReadyToTry";
@@ -28,7 +29,12 @@ export default function Home() {
           showCTA={false}
           showCards={false}
         />
-        <LovedByUsers theme="light" showCTA={false} />
+        <LovedByUsers
+          theme="light"
+          body={<IntelligenceStack />}
+          showCTA={false}
+          showCards={false}
+        />
         <FAQ
           theme="dark"
           headingTop="Enterprise-Grade from Day One."

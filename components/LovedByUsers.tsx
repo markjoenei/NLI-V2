@@ -91,60 +91,37 @@ type HeadingProps = {
   theme?: Theme;
 };
 
-const FAILURE_ITEMS: { label: string; text: string; image: string }[] = [
-  {
-    label: "Broken foundation",
-    text: "They're built on top of broken processes instead of redesigning them.",
-    image: "/generated/broken-foundation.jpg",
-  },
-  {
-    label: "Dead-end insights",
-    text: "They produce insights nobody acts on.",
-    image: "/generated/dead-end-insights.avif",
-  },
-  {
-    label: "Vendor lock-in",
-    text: "They're maintained by vendors, not owned by your team.",
-    image: "/generated/vendor-lock-in.jpg",
-  },
-  {
-    label: "Demo-grade, not prod-grade",
-    text: "They impress in demos and disappear in production.",
-    image: "/generated/demo-grade.jpg",
-  },
+type PillTone = "white" | "gray" | "lavender" | "indigoMid" | "indigoBold";
+
+const PILL_BG: Record<PillTone, string> = {
+  white: "#ffffff",
+  gray: "#eef0f5",
+  lavender: "#dde3f1",
+  indigoMid: "#c4cfe7",
+  indigoBold: "#9eafde",
+};
+
+const FAILURE_PILLS: { text: string; tone: PillTone; offset?: string }[] = [
+  { text: "They're built on top of broken processes instead of redesigning them.", tone: "white", offset: "md:-rotate-[3deg]" },
+  { text: "They produce insights nobody acts on.", tone: "lavender", offset: "md:translate-y-3" },
+  { text: "They're maintained by vendors, not owned by your team.", tone: "indigoBold", offset: "md:-rotate-[2deg]" },
+  { text: "They impress in demos and disappear in production.", tone: "indigoMid", offset: "md:translate-y-2 md:rotate-[3deg]" },
 ];
 
 export const FAILURE_LIST_BODY = (
-  <div className="mt-10 md:mt-14 w-full grid sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5 text-left">
-    {FAILURE_ITEMS.map((item) => (
+  <div className="mt-12 md:mt-16 w-full max-w-[1100px] mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
+    {FAILURE_PILLS.map((pill, i) => (
       <div
-        key={item.label}
-        className="group relative flex flex-col rounded-2xl bg-[#0e0a24] ring-1 ring-white/[0.06] hover:ring-white/[0.12] shadow-[0_12px_40px_-20px_rgba(8,8,30,0.55)] transition-all overflow-hidden"
+        key={i}
+        className={`rounded-2xl px-5 py-6 md:px-6 md:py-8 text-center text-[#0a0a14] text-[14px] md:text-[15.5px] font-medium leading-snug shadow-[0_6px_22px_-12px_rgba(20,18,60,0.16)] transition-transform ${pill.offset ?? ""}`}
+        style={{ background: PILL_BG[pill.tone] }}
       >
-        <div className="relative aspect-square overflow-hidden">
-          <Image
-            src={item.image}
-            alt={item.label}
-            fill
-            className="object-cover transition-transform duration-700 group-hover:scale-[1.04]"
-            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
-          />
-          <div className="absolute top-3 left-3">
-            <span className="inline-flex items-center gap-1.5 text-[10.5px] font-semibold text-white bg-black/55 backdrop-blur ring-1 ring-white/15 rounded-full px-2.5 py-1">
-              <span className="h-1.5 w-1.5 rounded-full bg-[#22c55e] pulse-soft" />
-              {item.label}
-            </span>
-          </div>
-        </div>
-        <div className="p-6 md:p-7 min-w-0 flex-1">
-          <p className="text-[15.5px] md:text-[16.5px] leading-[1.55] text-white/75 text-pretty">
-            {item.text}
-          </p>
-        </div>
+        {pill.text}
       </div>
     ))}
   </div>
 );
+
 
 export default function LovedByUsers({
   eyebrow = "What NLI Builds",
