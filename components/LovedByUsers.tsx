@@ -102,18 +102,23 @@ const PILL_BG: Record<PillTone, string> = {
 };
 
 const FAILURE_PILLS: { text: string; tone: PillTone; offset?: string }[] = [
-  { text: "They're built on top of broken processes instead of redesigning them.", tone: "white", offset: "md:-rotate-[3deg]" },
-  { text: "They produce insights nobody acts on.", tone: "lavender", offset: "md:translate-y-3" },
-  { text: "They're maintained by vendors, not owned by your team.", tone: "indigoBold", offset: "md:-rotate-[2deg]" },
-  { text: "They impress in demos and disappear in production.", tone: "indigoMid", offset: "md:translate-y-2 md:rotate-[3deg]" },
+  { text: "Manual data entry slowing down daily operations.", tone: "white", offset: "md:translate-y-2 md:-rotate-[3deg]" },
+  { text: "Customer support delays that cost new sales.", tone: "indigoMid", offset: "md:-translate-y-1" },
+  { text: "Difficulty scaling services without increasing overhead.", tone: "gray", offset: "md:translate-y-4" },
+  { text: "Inconsistent follow-ups during high-volume periods.", tone: "gray", offset: "md:translate-y-3" },
+  { text: "Fragmented workflows across disconnected software tools.", tone: "indigoBold", offset: "md:-translate-y-2" },
+  { text: "Time-consuming reporting that delays business decisions.", tone: "lavender", offset: "md:translate-y-1" },
+  { text: "Information silos that hide critical business data.", tone: "white", offset: "md:-translate-y-1" },
+  { text: "Valuable expertise wasted on routine administrative tasks.", tone: "white", offset: "md:translate-y-2 md:-rotate-[2deg]" },
+  { text: "Backlogs caused by outdated manual review processes.", tone: "lavender", offset: "md:rotate-[3deg]" },
 ];
 
 export const FAILURE_LIST_BODY = (
-  <div className="mt-12 md:mt-16 w-full max-w-[1100px] mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
+  <div className="mt-14 md:mt-20 w-full max-w-[1100px] mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
     {FAILURE_PILLS.map((pill, i) => (
       <div
         key={i}
-        className={`rounded-2xl px-5 py-6 md:px-6 md:py-8 text-center text-[#0a0a14] text-[14px] md:text-[15.5px] font-medium leading-snug shadow-[0_6px_22px_-12px_rgba(20,18,60,0.16)] transition-transform ${pill.offset ?? ""}`}
+        className={`rounded-[22px] px-6 py-7 md:px-7 md:py-9 text-center text-[#0a0a14] text-[15px] md:text-[16.5px] font-medium leading-snug shadow-[0_10px_28px_-18px_rgba(20,18,60,0.22)] ${pill.offset ?? ""}`}
         style={{ background: PILL_BG[pill.tone] }}
       >
         {pill.text}
