@@ -28,7 +28,7 @@ export default function Features() {
           <FeatureBig
             className="col-span-12"
             title="Intelligence Layer"
-            body="NLI — predicts, decides, executes"
+            body="A custom intelligence layer that sits on top of your existing tech stack — connecting your data, systems, and processes to predict outcomes and execute action automatically."
             variant="portrait-warm"
             badge=""
           />
