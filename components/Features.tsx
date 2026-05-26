@@ -19,7 +19,7 @@ export default function Features() {
           </div>
           <div className="max-w-[680px]">
             <p className="text-[15px] md:text-[16px] leading-[1.6] text-[#4a4a55] text-pretty">
-              The &ldquo;Next Layer&rdquo; is a custom-engineered intelligence layer designed to unify a business&apos;s data, systems, people, and processes. Rather than acting as a standard software subscription or passive dashboard, it sits on top of an existing tech stack to continuously monitor activity, predict future outcomes, and execute autonomous actions. Ultimately, it ties disparate operations together to maximize the efficiency of every part of the business without the need for manual intervention or meetings.
+              A custom intelligence layer that sits on top of your existing tech stack — connecting your data, systems, and processes to predict outcomes and execute action automatically.
             </p>
           </div>
         </div>
